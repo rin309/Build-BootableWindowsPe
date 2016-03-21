@@ -1,0 +1,50 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <Style BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type TextBox}">
+        <Setter Property="Padding" Value="1,3"/>
+    </Style>
+    <Style BasedOn="{StaticResource {x:Type Button}}" TargetType="{x:Type Button}">
+        <Setter Property="Padding" Value="20,5"/>
+    </Style>
+    <Style BasedOn="{StaticResource {x:Type CheckBox}}" TargetType="{x:Type CheckBox}">
+        <Setter Property="Margin" Value="4,5,20,5"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+
+
+    <Style x:Key="BackButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="42"/>
+        <Setter Property="Width" Value="42"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="Padding" Value="2"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid Margin="{TemplateBinding Padding}">
+                        <Path x:Name="press" Stretch="Fill" Fill="{TemplateBinding Foreground}" Data="F1 M 37.9952,18.9976C 37.9952,8.50553 29.4897,0 18.9976,0C 8.50553,0 -3.97364e-008,8.50553 -3.97364e-008,18.9976C -3.97364e-008,29.4897 8.50553,37.9953 18.9976,37.9953C 29.4897,37.9953 37.9952,29.4897 37.9952,18.9976 Z M 29.6542,17.0973L 29.6542,21.0979L 16.0809,21.0979L 20.3635,25.3805L 17.5347,28.2093L 8.341,19.0157L 11.1698,16.1868L 11.2018,16.2188L 17.6347,9.78593L 20.4635,12.6147L 15.9809,17.0973L 29.6542,17.0973 Z " HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Opacity="1" Visibility="Hidden" Margin="2"/>
+                        <Path x:Name="base" Stretch="Fill" Fill="{TemplateBinding Foreground}" Data="F1 M 37.9952,18.9976C 37.9952,29.4897 29.4897,37.9953 18.9976,37.9953C 8.50553,37.9953 -1.98681e-008,29.4897 -1.98681e-008,18.9976C -1.98681e-008,8.50553 8.50553,0 18.9976,0C 29.4897,0 37.9952,8.50554 37.9952,18.9976 Z M 1.99975,18.9976C 1.99975,28.3853 9.60995,35.9955 18.9976,35.9955C 28.3853,35.9955 35.9955,28.3853 35.9955,18.9976C 35.9955,9.60997 28.3853,1.99976 18.9976,1.99976C 9.60996,1.99976 1.99975,9.60997 1.99975,18.9976 Z M 16.0809,21.0979L 20.3635,25.3805L 17.5347,28.2093L 8.341,19.0157L 11.1698,16.1868L 11.2018,16.2188L 17.6347,9.78593L 20.4635,12.6147L 15.9809,17.0973L 29.6542,17.0973L 29.6542,21.0979L 16.0809,21.0979 Z " HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Margin="2"/>
+                        <Ellipse x:Name="mouseover" Stretch="Fill" Fill="{TemplateBinding Foreground}" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Visibility="Hidden" Opacity="0.25" Margin="2"/>
+
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Visibility" TargetName="mouseover" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Visibility" TargetName="mouseover" Value="Hidden"/>
+                            <Setter Property="Visibility" TargetName="base" Value="Hidden"/>
+                            <Setter Property="Visibility" TargetName="press" Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+</ResourceDictionary>

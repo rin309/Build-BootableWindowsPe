@@ -1,0 +1,191 @@
+﻿<Window 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApplication1"
+        mc:Ignorable="d" SnapsToDevicePixels="true" FontSize="14"
+        Title="MainWindow" Height="700" Width="800" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="%BasedDirectory%/Assets/ThemeResource.xaml" />
+                <ResourceDictionary Source="%BasedDirectory%/Assets/StyleResource.xaml" />
+                <ResourceDictionary Source="%BasedDirectory%/Assets/NavigationTabResource.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <TabControl Style="{DynamicResource TabControlStyle}" >
+        <TabItem Tag="セットアップ" Style="{DynamicResource TabItemStyle}">
+            <TabItem.Header></TabItem.Header>
+            <StackPanel>
+                <TextBlock Margin="0,0,0,10" FontSize="32">Windows プレインストール環境のセットアップ</TextBlock>
+                <TextBlock Margin="0,10,0,0" FontSize="22">最初に、Windows PE の ISO イメージを作成します。</TextBlock>
+                <TextBlock Margin="0,10,0,0">稼働させるPCのプラットフォーム</TextBlock>
+                <ComboBox x:Name="SelectPlatformComboBox" SelectedItem="{Binding ElementName=Pe64ComboBoxItem, Mode=OneWay}" HorizontalAlignment="Left">
+                    <ComboBoxItem x:Name="Pe64ComboBoxItem">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="64ビットのUEFI PCと64ビットのBIOS PC"/>
+                            <TextBlock Text=" (64ビット版Windows PE)">
+                                <TextBlock.Foreground>
+                                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.GrayTextColorKey}}"/>
+                                </TextBlock.Foreground>
+                            </TextBlock>
+                        </StackPanel>
+                    </ComboBoxItem>
+                    <ComboBoxItem x:Name="Pe32ComboBoxItem">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="32ビットのUEFI PC、32ビットのBIOS PC、64ビットのBIOS PC"/>
+                            <TextBlock Text=" (32ビット版Windows PE)">
+                                <TextBlock.Foreground>
+                                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.GrayTextColorKey}}"/>
+                                </TextBlock.Foreground>
+                            </TextBlock>
+                        </StackPanel>
+                    </ComboBoxItem>
+                </ComboBox>
+
+                <TextBlock Margin="0,10,0,0">Windows ADKがインストールされているフォルダー</TextBlock>
+                <Grid Width="400" HorizontalAlignment="Left">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="WindowsAdkPathTextBox" IsReadOnly="True" Grid.Column="0"/>
+                    <Button x:Name="WindowsAdkPathButton" Content="参照" Grid.Column="1"/>
+                </Grid>
+                <TextBlock Margin="0,10,0,0">コピーしたいファイル (オプション)</TextBlock>
+                <Grid Width="400" HorizontalAlignment="Left">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="Option1PathTextBox" IsReadOnly="True" Grid.Column="0"/>
+                    <Button x:Name="Option1PathButton" Content="参照" Grid.Column="1"/>
+                </Grid>
+                <TextBlock Margin="0,10,0,0">コピーしたいファイル (オプション)</TextBlock>
+                <Grid Width="400" HorizontalAlignment="Left">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="Option2PathTextBox" IsReadOnly="True" Grid.Column="0"/>
+                    <Button x:Name="Option2PathButton" Content="参照" Grid.Column="1"/>
+                </Grid>
+                <TextBlock Margin="0,10,0,0">Windows PEプロジェクトの保存先 (作業フォルダー)</TextBlock>
+                <Grid Width="400" HorizontalAlignment="Left">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="ProjectPathTextBox" IsReadOnly="True" Grid.Column="0"/>
+                    <Button x:Name="ProjectPathButton" Content="参照" Grid.Column="1"/>
+                </Grid>
+                <TextBlock Margin="0,10,0,0">Windows PEイメージの保存先</TextBlock>
+                <Grid Width="400" HorizontalAlignment="Left">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="SavePathTextBox" IsReadOnly="True" Grid.Column="0"/>
+                    <Button x:Name="SavePathButton" Content="参照" Grid.Column="1"/>
+                </Grid>
+                <Button x:Name="SaveButton" Margin="0,20,0,0" HorizontalAlignment="Left" Background="{DynamicResource AccentBrush}" Foreground="White" FontWeight="Bold">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Canvas Width="16" Height="16" Canvas.Left="0" Canvas.Top="0">
+                            <Path Width="6.68219" Height="7.33332" Canvas.Left="8" Canvas.Top="8" Stretch="Fill" Fill="#FF0069C9" Data="F1 M 8,15.3333C 8.88179,15.3301 9.80008,14.9776 10.7024,14.2011C 13.1428,12.1011 14.2228,9.86967 14.6822,8L 8,8L 8,15.3333 Z "/>
+                            <Path Width="6.73484" Height="7.33334" Canvas.Left="1.26516" Canvas.Top="8" Stretch="Fill" Fill="#FFFEBD38" Data="F1 M 8,8L 1.26516,8C 1.70385,9.88499 2.8172,12.1566 5.51932,14.3718C 6.27495,14.9912 7.11928,15.3365 8,15.3333L 8,8 Z "/>
+                            <Path Width="7.00132" Height="7.33321" Canvas.Left="0.998675" Canvas.Top="0.66679" Stretch="Fill" Fill="#FF0069C9" Data="F1 M 1.79502,3.29241C 1.37462,3.33134 1.03701,3.32773 1.05754,3.87613C 1.08108,4.50488 0.810032,6.04438 1.26516,8L 8,8L 8,0.66679C 6.98049,0.689614 5.60185,1.8288 4.81968,2.25315C 3.88471,2.7604 2.45315,3.23145 1.79502,3.29241 Z "/>
+                            <Path Width="7.00005" Height="7.33321" Canvas.Left="8" Canvas.Top="0.66679" Stretch="Fill" Fill="#FFFEBD38" Data="F1 M 8,0.66679L 8,8L 14.6822,8C 15.1789,5.97836 14.95,4.37964 14.9307,3.82717C 14.9099,3.23262 14.7398,3.3629 14.2101,3.2839C 13.3576,3.15675 12.1321,2.7969 10.9358,2.09895C 10.2582,1.70367 9.00038,0.683145 8,0.66679 Z "/>
+                            <Path Width="15.0014" Height="15.6669" Canvas.Left="0.498689" Canvas.Top="0.166463" Stretch="Fill" StrokeLineJoin="Round" Stroke="#FF474747" Data="F1 M 8.05418,0.666665C 9.0004,0.683167 10.2583,1.70369 10.9358,2.09897C 12.1321,2.79693 13.3576,3.15677 14.2102,3.28392C 14.7398,3.36292 14.9099,3.23264 14.9307,3.82719C 14.9679,4.89061 15.7815,9.83035 10.7024,14.2011C 8.89891,15.7531 7.03151,15.6115 5.51933,14.3718C 0.0138423,9.85838 1.10378,5.11093 1.05755,3.87615C 1.03702,3.32775 1.37464,3.33137 1.79504,3.29243C 2.45316,3.23147 3.88473,2.76042 4.8197,2.25317C 5.61581,1.82125 7.02984,0.648801 8.05418,0.666665 Z "/>
+                        </Canvas>
+
+                        <TextBlock Text="作成して実行" Grid.Column="1" VerticalAlignment="Center"/>
+                    </Grid>
+                </Button>
+            </StackPanel>
+        </TabItem>
+        <TabItem Tag="サンプルを探す" Style="{DynamicResource TabItemStyle}">
+            <TabItem.Header></TabItem.Header>
+            <StackPanel>
+                <TextBlock Margin="0,0,0,10" FontSize="32">カスタマイズについて学ぶ</TextBlock>
+                <TextBlock Margin="0,10,0,0" FontSize="22">Windows 10向け Windows PE</TextBlock>
+                <TextBlock Margin="0,10,0,0"><Hyperlink x:Name="Hyperlink1" NavigateUri="http://msdn.microsoft.com/ja-jp/library/windows/hardware/dn938389.aspx">Windows 10 用 Windows PE</Hyperlink></TextBlock>
+                <StackPanel Margin="20,0,0,0">
+                    <TextBlock Margin="0,10,0,0"><Hyperlink x:Name="Hyperlink2" NavigateUri="https://msdn.microsoft.com/ja-jp/library/windows/hardware/dn938382.aspx">Windows PE パッケージの追加 (オプション コンポーネント リファレンス)</Hyperlink></TextBlock>
+                    <TextBlock Margin="0,10,0,0"><Hyperlink x:Name="Hyperlink3" NavigateUri="https://msdn.microsoft.com/ja-jp/library/windows/hardware/dn938364.aspx">Windows 10 用回復環境 (Windows RE)</Hyperlink></TextBlock>
+                    <TextBlock Margin="0,10,0,0"><Hyperlink x:Name="Hyperlink4" NavigateUri="https://msdn.microsoft.com/ja-jp/library/windows/hardware/dn938360.aspx">Windows 10 の展開オプション</Hyperlink></TextBlock>
+                </StackPanel>
+                <TextBlock Margin="0,10,0,0" FontSize="22">過去の Windows 向け Windows PE</TextBlock>
+                <TextBlock Margin="0,10,0,0"><Hyperlink x:Name="Hyperlink101" NavigateUri="https://msdn.microsoft.com/ja-jp/library/hh825110.aspx">Windows 8 用 Windows PE</Hyperlink></TextBlock>
+                <StackPanel Margin="20,0,0,0">
+                    <TextBlock Margin="0,10,0,0"><Hyperlink x:Name="Hyperlink102" NavigateUri="https://support.microsoft.com/ja-jp/kb/2900836">Windows PE 4.0 以降では Input Method Editor (IME) は追加できません </Hyperlink></TextBlock>
+                </StackPanel>
+                <TextBlock Margin="0,10,0,0"><Hyperlink x:Name="Hyperlink111" NavigateUri="https://technet.microsoft.com/ja-jp/library/dd744322.aspx">Windows 7 用 Windows PE</Hyperlink></TextBlock>
+                <StackPanel Margin="20,0,0,0">
+                    <TextBlock Margin="0,10,0,0"><Hyperlink x:Name="Hyperlink112" NavigateUri="http://technet.microsoft.com/ja-jp/library/dd744589.aspx">Input Method Editor (IME) を Windows PE に追加する</Hyperlink></TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </TabItem>
+        <TabItem Tag="コマンド" Style="{DynamicResource TabItemStyle}">
+            <TabItem.Header></TabItem.Header>
+            <StackPanel>
+                <TextBlock Margin="0,0,0,10" FontSize="32">詳細なカスタマイズ</TextBlock>
+                <TextBlock Margin="0,10,0,0" FontSize="22">Windows PEにパッケージを追加する</TextBlock>
+                <ListBox>
+                    <CheckBox x:Name="SupportJapaneseLanguageCheckBox" IsChecked="True">日本語表示のサポート</CheckBox>
+                    <!--<CheckBox x:Name="SupportJapaneseImeCheckBox">日本語入力のサポート</CheckBox>-->
+                    <CheckBox x:Name="SupportWindowsReCheckBox">回復環境 (Windows RE) と同等にする</CheckBox>
+                    <CheckBox x:Name="SupportWmiCheckBox" Margin="20,0,0,0" IsEnabled="False">WinPE-WMI</CheckBox>
+                    <CheckBox x:Name="SupportWindowsFoundationPackageCheckBox" Margin="20,0,0,0" IsEnabled="False">Microsoft-Windows-Foundation-Package</CheckBox>
+                    <CheckBox x:Name="SupportEsCheckBox" Margin="20,0,0,0" IsEnabled="False">WinPE-EnhancedStorage</CheckBox>
+                    <CheckBox x:Name="SupportRejuvCheckBox" Margin="20,0,0,0" IsEnabled="False">WinPE-Rejuv</CheckBox>
+                    <CheckBox x:Name="SupportScriptingCheckBox" Margin="20,0,0,0" IsEnabled="False">WinPE-Scripting</CheckBox>
+                    <CheckBox x:Name="SupportSecureStartupCheckBox" Margin="20,0,0,0" IsEnabled="False">WinPE-SecureStartup</CheckBox>
+                    <CheckBox x:Name="SupportSetupCheckBox" Margin="20,0,0,0" IsEnabled="False">WinPE-Setup</CheckBox>
+                    <CheckBox x:Name="SupportSrtCheckBox" Margin="20,0,0,0" IsEnabled="False">WinPE-SRT</CheckBox>
+                    <CheckBox x:Name="SupportWdsCheckBox" Margin="20,0,0,0" IsEnabled="False">WinPE-WDS-Tools</CheckBox>
+                    <CheckBox x:Name="SupportStorageWmiCheckBox" Margin="20,0,0,0" IsEnabled="False">WinPE-StorageWMI-Package (Windows 8.1 および Windows Server 2012 R2 の基本イメージに追加)</CheckBox>
+                    <CheckBox x:Name="SupportHtaCheckBox" Margin="20,0,0,0" IsEnabled="False">WinPE-HTA (Windows 10 の基本イメージに追加)</CheckBox>
+                    <CheckBox x:Name="SupportPsCheckBox">PowerShellのサポート</CheckBox>
+                    <CheckBox x:Name="SupportWmiCheckBox2" Margin="20,0,0,0" IsEnabled="False" IsChecked="{Binding IsChecked, ElementName=SupportWmiCheckBox}">WinPE-WMI</CheckBox>
+                    <CheckBox x:Name="SupportNetFxCheckBox" Margin="20,0,0,0" IsEnabled="False">.NET Framework 4.5のサポート</CheckBox>
+                    <CheckBox x:Name="SupportScriptingCheckBox2" Margin="20,0,0,0" IsEnabled="False" IsChecked="{Binding IsChecked, ElementName=SupportScriptingCheckBox}">WinPE-Scripting</CheckBox>
+                    <CheckBox x:Name="SupportDismCmdletsCheckBox" Margin="20,0,0,0">WinPE-DismCmdlets</CheckBox>
+                    <CheckBox x:Name="SupportSecureBootCmdletsCheckBox" Margin="20,0,0,0">WinPE-SecureBootCmdlets</CheckBox>
+                    <CheckBox x:Name="SupportStorageWmiCheckBox2" Margin="20,0,0,0" IsEnabled="False" IsChecked="{Binding IsChecked, ElementName=SupportStorageWmiCheckBox}">WinPE-StorageWMI-Package (Windows 8.1 および Windows Server 2012 R2 の基本イメージに追加)</CheckBox>
+                </ListBox>
+            </StackPanel>
+        </TabItem>
+        <!--<TabItem Tag="スケジュール" Style="{DynamicResource TabItemStyle}">
+            <TabItem.Header></TabItem.Header>
+            <StackPanel>
+                <TextBlock Margin="0,0,0,10" FontSize="32">スケジュール</TextBlock>
+                <TextBlock Margin="0,10,0,0" FontSize="22"></TextBlock>
+                <TextBlock Margin="0,10,0,0"></TextBlock>
+            </StackPanel>
+        </TabItem>-->
+        <TabItem Tag="設定" Style="{DynamicResource TabItemStyle}">
+            <TabItem.Header></TabItem.Header>
+            <StackPanel>
+                <TextBlock Margin="0,0,0,10" FontSize="32">設定</TextBlock>
+                <TextBlock Margin="0,0,0,10">保存可能な設定はありません。</TextBlock>
+                <TextBlock Margin="0,10,0,0" FontSize="32">バージョン情報</TextBlock>
+                <TextBlock x:Name="ApplicationTitleTextBlock" Margin="0,10,0,0" FontSize="22"></TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>更新日: </TextBlock>
+                    <TextBlock x:Name="ApplicationLastUpdatedTextBlock"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>© </TextBlock>
+                    <TextBlock x:Name="AuthorTextBlock"></TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </TabItem>
+
+    </TabControl>
+</Window>

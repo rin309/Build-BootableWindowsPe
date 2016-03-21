@@ -1,0 +1,106 @@
+@rem * "展開およびイメージング ツール環境"で実行したことにする
+cd /d "%DeploymentToolsPath%"
+call "%DandISetEnvPath%"
+
+@rem * Ghostを含む起動可能なWindows PEイメージを作成する
+call copype %MsPlatformId% "%PeDirectory%"
+
+@rem ** イメージをマウントする
+Dism /mount-image /imagefile:"%PeDirectory%media\sources\boot.wim" /index:1 /mountdir:"%PeDirectory%\mount"
+
+@rem ** イメージを修正する
+@rem *** オプション1をコピーする
+%Support-Option1%xcopy /e /r /c /h /y "%Option1Path%\*" "%PeDirectory%\mount"
+
+@rem *** オプション2をコピーする
+%Support-Option2%xcopy /e /r /c /h /y "%Option2Path%\*" "%PeDirectory%\mount"
+
+@rem *** 追加のパッケージをインストール
+%Support-WinPE-WMI%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-WMI.cab"
+%Support-WinPE-NetFx%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-NetFx.cab"
+%Support-WinPE-Scripting%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-Scripting.cab"
+%Support-WinPE-PowerShell%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-PowerShell.cab"
+%Support-WinPE-HTA%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-HTA.cab"
+%Support-WinPE-SecureStartup%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-SecureStartup.cab"
+%Support-WinPE-DismCmdlets%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-DismCmdlets.cab"
+%Support-WinPE-SecureBootCmdlets%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-SecureBootCmdlets.cab"
+%Support-WinPE-StorageWMI%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-StorageWMI.cab"
+
+%Support-WinPE-Setup%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-Setup.cab"
+%Support-WinPE-Setup-Client%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-Setup-Client.cab"
+%Support-WinPE-Setup-Server%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-Setup-Server.cab"
+
+%Support-WinPE-Dot3Svc%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-Dot3Svc.cab"
+%Support-WinPE-EnhancedStorage%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-EnhancedStorage.cab"
+%Support-WinPE-FMAPI%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-FMAPI.cab"
+%Support-WinPE-Fonts-Legacy%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-Fonts-Legacy.cab"
+%Support-WinPE-FontSupport-JA-JP%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-FontSupport-JA-JP.cab"
+%Support-WinPE-FontSupport-KO-KR%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-FontSupport-KO-KR.cab"
+%Support-WinPE-FontSupport-WinRE%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-FontSupport-WinRE.cab"
+%Support-WinPE-FontSupport-ZH-CN%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-FontSupport-ZH-CN.cab"
+%Support-WinPE-FontSupport-ZH-HK%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-FontSupport-ZH-HK.cab"
+%Support-WinPE-FontSupport-ZH-TW%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-FontSupport-ZH-TW.cab"
+%Support-WinPE-LegacySetup%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-LegacySetup.cab"
+%Support-WinPE-MDAC%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-MDAC.cab"
+%Support-WinPE-PPPoE%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-PPPoE.cab"
+%Support-WinPE-RNDIS%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-RNDIS.cab"
+%Support-WinPE-WDS-Tools%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-WDS-Tools.cab"
+%Support-WinPE-WinReCfg%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-WinReCfg.cab"
+
+%Support-Japanese-lp%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\ja-jp\lp.cab"
+%Support-Japanese-WinPE-DismCmdlets_ja-jp%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\ja-jp\WinPE-DismCmdlets_ja-jp.cab"
+%Support-Japanese-WinPE-Dot3Svc_ja-jp%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\ja-jp\WinPE-Dot3Svc_ja-jp.cab"
+%Support-Japanese-WinPE-EnhancedStorage_ja-jp%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\ja-jp\WinPE-EnhancedStorage_ja-jp.cab"
+%Support-Japanese-WinPE-HTA_ja-jp%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\ja-jp\WinPE-HTA_ja-jp.cab"
+%Support-Japanese-WinPE-LegacySetup_ja-jp%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\ja-jp\WinPE-LegacySetup_ja-jp.cab"
+%Support-Japanese-WinPE-MDAC_ja-jp%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\ja-jp\WinPE-MDAC_ja-jp.cab"
+%Support-Japanese-WinPE-NetFx_ja-jp%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\ja-jp\WinPE-NetFx_ja-jp.cab"
+%Support-Japanese-WinPE-PowerShell_ja-jp%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\ja-jp\WinPE-PowerShell_ja-jp.cab"
+%Support-Japanese-WinPE-PPPoE_ja-jp%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\ja-jp\WinPE-PPPoE_ja-jp.cab"
+%Support-Japanese-WinPE-Rejuv_ja-jp%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\ja-jp\WinPE-Rejuv_ja-jp.cab"
+%Support-Japanese-WinPE-RNDIS_ja-jp%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\ja-jp\WinPE-RNDIS_ja-jp.cab"
+%Support-Japanese-WinPE-Scripting_ja-jp%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\ja-jp\WinPE-Scripting_ja-jp.cab"
+%Support-Japanese-WinPE-SecureStartup_ja-jp%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\ja-jp\WinPE-SecureStartup_ja-jp.cab"
+%Support-Japanese-WinPE-Setup_ja-jp%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\ja-jp\WinPE-Setup_ja-jp.cab"
+%Support-Japanese-WinPE-Setup-Client_ja-jp%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\ja-jp\WinPE-Setup-Client_ja-jp.cab"
+%Support-Japanese-WinPE-Setup-Server_ja-jp%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\ja-jp\WinPE-Setup-Server_ja-jp.cab"
+%Support-Japanese-WinPE-SRT_ja-jp%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\ja-jp\WinPE-SRT_ja-jp.cab"
+%Support-Japanese-WinPE-StorageWMI_ja-jp%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\ja-jp\WinPE-StorageWMI_ja-jp.cab"
+%Support-Japanese-WinPE-WDS-Tools_ja-jp%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\ja-jp\WinPE-WDS-Tools_ja-jp.cab"
+%Support-Japanese-WinPE-WinReCfg_ja-jp%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\ja-jp\WinPE-WinReCfg_ja-jp.cab"
+%Support-Japanese-WinPE-WMI_ja-jp%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\ja-jp\WinPE-WMI_ja-jp.cab"
+
+@rem *** 日本語設定
+%Support-Japanese%Dism /image:"%PeDirectory%\mount" /set-allintl:ja-jp
+%Support-Japanese%Dism /image:"%PeDirectory%\mount" /set-layereddriver:6
+%Support-Japanese%Bcdedit /store "%PeDirectory%media\Boot\BCD" /set {bootmgr} locale ja-jp
+%Support-Japanese%Bcdedit /store "%PeDirectory%media\Boot\BCD" /set {default} locale ja-jp
+
+@rem *** PXEブートに対応する
+Bcdedit /store "%PeDirectory%\media\Boot\BCD" /deletevalue {default} bootmenupolicy
+copy "%PeDirectory%\mount\Windows\Boot\PXE\bootmgr.exe" "%PeDirectory%\media\Boot\bootmgr.exe"
+copy "%PeDirectory%\mount\Windows\Boot\PXE\pxeboot.n12" "%PeDirectory\media\Boot\pxeboot.n12"
+
+@rem 64ビット版Windows向けでPXEブート対応にするためにUEFIのみにする
+@rem bcdedit /store "%PeDirectory%\media\Boot\BCD" /set {Default} path \windows\system32\winload.efi
+
+@rem ** マウントしたイメージを保存する
+Dism /Unmount-Image /mountdir:"%PeDirectory%\mount" /Commit
+
+@rem ** 「Press any key to boot from CD or DVD...」を表示せず起動する
+del "%PeDirectory%\media\Boot\bootfix.bin"
+del "%PeDirectory%\media\Boot\bootfix.bin"
+del "%PeDirectory%\fwfiles\efisys.bin"
+copy "%EfisysNoPromptPath%" "%PeDirectory%fwfiles\efisys.bin"
+
+@rem ** Ghostを含む起動可能なWindows PEイメージを選択した場所に保存する
+call Makewinpemedia /iso "%PeDirectory%" "%BuildedWindowsPePath%"
+
+rd "%PeDirectory%\media" /s /q
+rd "%PeDirectory%\mount" /s /q
+rd "%PeDirectory%" /s /q
+
+@rem * 大掃除
+@rem dism /cleanup-wim
+@rem dism /cleanup-mountpoints
+
