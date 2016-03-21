@@ -1,0 +1,2 @@
+# Build-BootableWindowsPeIso
+起動可能なWindows PEのISOイメージ作成をアシスタントするスクリプト
