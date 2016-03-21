@@ -13,7 +13,7 @@ Add-Type -AssemblyName System.Windows.Forms
 $script:BasedDirectory = Split-Path $MyInvocation.MyCommand.Path -Parent
 
 # プロジェクトフォルダーの初期値
-$script:ProjectDirectoryPath = "d:\test"
+$script:ProjectDirectoryPath = ""
 
 # オプション2のファイルがあるフォルダー
 $global:Option2Path = "%BasedDirectory%\Assets\%PlatformId%"
