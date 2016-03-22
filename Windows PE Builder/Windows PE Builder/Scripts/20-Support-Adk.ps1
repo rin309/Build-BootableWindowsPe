@@ -8,7 +8,7 @@ $global:BuildedWindowsPePath = "WindowsPE-%PlatformId%.iso"
 $global:BaseBatchPath = "assets\base.txt"
 
 # Build-Peコマンドのパス
-$global:BuildPePath = "Build-Pe.bat"
+$global:BuildPeBatPath = "Build-Pe.bat"
 
 # ADK関連のパス
 $global:DeploymentToolsPath = "Assessment and Deployment Kit\Deployment Tools\"

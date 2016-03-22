@@ -200,9 +200,9 @@ Function global:Load-Xaml()
     })
 
     $MainWindow.FindName("WindowsAdkPathTextBox").Text = Extis-Path($WinAdkPath)
-    $MainWindow.FindName("Option1PathTextBox").Text = Extis-Path($global:GhostPath)
+    $MainWindow.FindName("Option1PathTextBox").Text = $global:GhostPath
     $MainWindow.FindName("Option2PathTextBox").Text = $global:Option2Path
-    $MainWindow.FindName("ProjectPathTextBox").Text = $ProjectDirectoryPath
+    $MainWindow.FindName("ProjectPathTextBox").Text = $global:ProjectDirectoryPath
 
     Check-SaveAvailable($MainWindow)
 

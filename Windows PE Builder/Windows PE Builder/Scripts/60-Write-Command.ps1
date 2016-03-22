@@ -4,11 +4,11 @@
 
 Function global:Write-Command($Line)
 {
-    $BuildPePath = Join-Path $ProjectDirectoryPath $BuildPePath 
-    Out-File -InputObject $Line -FilePath $BuildPePath -Append
+    $CommandPath = Join-Path $global:ProjectDirectoryPath $BuildPePath 
+    Out-File -InputObject $Line -FilePath $CommandPath -Append
 }
 
-Function global:Check-Path-ForWriteCoomand($Path)
+Function global:Check-Path-ForWriteCommand($Path)
 {
     if ($Path -ne "")
     {
@@ -22,7 +22,7 @@ Function global:Check-Path-ForWriteCoomand($Path)
     }
 }
 
-Function global:Check-Boolean-ForWriteCoomand($Checked)
+Function global:Check-Boolean-ForWriteCommand($Checked)
 {
     if ($Checked -eq $true)
     {
