@@ -10,7 +10,7 @@ Dism /mount-image /imagefile:"%PeDirectory%media\sources\boot.wim" /index:1 /mou
 
 @rem ** イメージを修正する
 @rem *** オプション1をコピーする
-%Support-Option1%xcopy /e /r /c /h /y "%Option1Path%\*" "%PeDirectory%"
+%Support-Option1%xcopy /e /r /c /h /y "%Option1Path%\*" "%PeDirectory%\mount"
 
 @rem *** オプション2をコピーする
 %Support-Option2%xcopy /e /r /c /h /y "%Option2Path%\*" "%PeDirectory%"
