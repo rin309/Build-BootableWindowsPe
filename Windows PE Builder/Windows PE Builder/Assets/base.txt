@@ -91,7 +91,7 @@ Dism /Unmount-Image /mountdir:"%PeDirectory%\mount" /Commit
 del "%PeDirectory%\media\Boot\bootfix.bin"
 del "%PeDirectory%\media\Boot\bootfix.bin"
 del "%PeDirectory%\fwfiles\efisys.bin"
-copy "%EfisysNoPromptPath%" "%PeDirectory%fwfiles\efisys.bin"
+copy "%EfisysNoPromptPath%" "%PeDirectory%\fwfiles\efisys.bin"
 
 @rem ** Ghostを含む起動可能なWindows PEイメージを選択した場所に保存する
 call Makewinpemedia /iso "%PeDirectory%" "%BuildedWindowsPePath%"
