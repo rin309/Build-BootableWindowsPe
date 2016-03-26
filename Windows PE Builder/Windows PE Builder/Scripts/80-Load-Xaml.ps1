@@ -176,8 +176,8 @@ Function global:Load-Xaml()
     })
 
 	#Windows RE
-	$MainWindow.FindName("SupportWindowsReCheckBox").Add_Checked({Check-WindowsPeFeature $MainWindow.FindName("SupportWindowsReCheckBox").IsChecked $MainWindow.FindName("SupportPsCheckBox").IsChecked })
-	$MainWindow.FindName("SupportWindowsReCheckBox").Add_UnChecked({Check-WindowsPeFeature $MainWindow.FindName("SupportWindowsReCheckBox").IsChecked $MainWindow.FindName("SupportPsCheckBox").IsChecked })
+	<#$MainWindow.FindName("SupportWindowsReCheckBox").Add_Checked({Check-WindowsPeFeature $MainWindow.FindName("SupportWindowsReCheckBox").IsChecked $MainWindow.FindName("SupportPsCheckBox").IsChecked })
+	$MainWindow.FindName("SupportWindowsReCheckBox").Add_UnChecked({Check-WindowsPeFeature $MainWindow.FindName("SupportWindowsReCheckBox").IsChecked $MainWindow.FindName("SupportPsCheckBox").IsChecked })#>
 	
 	#PowerShell
 	$MainWindow.FindName("SupportPsCheckBox").Add_Checked({Check-WindowsPeFeature $MainWindow.FindName("SupportWindowsReCheckBox").IsChecked $MainWindow.FindName("SupportPsCheckBox").IsChecked })

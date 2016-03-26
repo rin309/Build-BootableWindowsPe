@@ -110,7 +110,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Grid Width="24" Height="24" Grid.Column="0" Margin="6" >
-                                <Path x:Name="TabHeaderIconPath" Data="{TemplateBinding Header}" Fill="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <Path x:Name="TabHeaderIconPath" Data="{TemplateBinding Header}" Fill="Black" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Grid>
                             <TextBlock x:Name="TabHeaderTextTextBlock" Text="{TemplateBinding Tag}" Grid.Column="1" VerticalAlignment="Center" Margin="12,0,0,0"/>
                         </Grid>
