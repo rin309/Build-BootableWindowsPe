@@ -8,7 +8,7 @@
     <SolidColorBrush x:Key="BorderBrush" Color="#FF84ADF8"/>
     <SolidColorBrush x:Key="BackgroundBrush" Color="#FF001A42"/>
     <Style BasedOn="{StaticResource {x:Type Hyperlink}}" TargetType="{x:Type Hyperlink}">
-        <Setter Property="Foreground" Value="#FA6800"/>
+        <Setter Property="Foreground" Value="#FF0078C7"/>
     </Style>
 
 </ResourceDictionary>

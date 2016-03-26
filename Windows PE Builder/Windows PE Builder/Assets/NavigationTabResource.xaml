@@ -109,7 +109,9 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock x:Name="TabHeaderIconTextBlock" Text="{TemplateBinding Header}" FontFamily="Segoe MDL2 Assets" FontSize="22" Grid.Column="0" Margin="6"/>
+                            <Grid Width="24" Height="24" Grid.Column="0" Margin="6" >
+                                <Path x:Name="TabHeaderIconPath" Data="{TemplateBinding Header}" Fill="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
                             <TextBlock x:Name="TabHeaderTextTextBlock" Text="{TemplateBinding Tag}" Grid.Column="1" VerticalAlignment="Center" Margin="12,0,0,0"/>
                         </Grid>
                     </Grid>
@@ -213,7 +215,7 @@
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Panel.ZIndex" Value="1"/>
                             <Setter Property="Opacity" TargetName="innerBorder" Value="1"/>
-                            <Setter Property="Foreground" TargetName="TabHeaderIconTextBlock" Value="{StaticResource AccentBrush}"/>
+                            <Setter Property="Fill" TargetName="TabHeaderIconPath" Value="{StaticResource AccentBrush}"/>
                             <Setter Property="Foreground" TargetName="TabHeaderTextTextBlock" Value="{StaticResource AccentBrush}"/>
                             <Setter Property="BorderBrush" TargetName="innerBorder" Value="{StaticResource AccentBrush}"/>
                             <Setter Property="BorderThickness" TargetName="innerBorder" Value="8,0,0,0"/>
