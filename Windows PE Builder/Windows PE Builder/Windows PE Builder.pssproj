@@ -44,10 +44,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\base.txt" />
+    <Content Include="Assets\IndeterminateResource.xaml" />
     <Content Include="Assets\NavigationTabResource.xaml" />
+    <Content Include="Assets\RequestCancel.txt" />
     <Content Include="Assets\StyleResource.xaml" />
     <Content Include="Assets\ThemeResource.xaml" />
-    <Content Include="View\EulaUserControl.xaml" />
     <Content Include="View\MainWindow.xaml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

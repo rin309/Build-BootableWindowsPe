@@ -6,9 +6,11 @@
 $script:ProjectDirectoryPath = ""
 $global:BuildedWindowsPePath = "WindowsPE-%PlatformId%.iso"
 $global:BaseBatchPath = "assets\base.txt"
+$global:CancelBatchPath = "assets\RequestCancel.txt"
 
 # Build-Peコマンドのパス
 $global:BuildPeBatPath = "Build-Pe.bat"
+$global:CleanUpPeBatPath = "CleanUp-BuildedPe.bat"
 
 # ADK関連のパス
 $global:DeploymentToolsPath = "Assessment and Deployment Kit\Deployment Tools\"

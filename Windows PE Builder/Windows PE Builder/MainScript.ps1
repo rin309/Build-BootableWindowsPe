@@ -22,14 +22,11 @@ $global:Option2Path = "%BasedDirectory%\Assets\%PlatformId%"
 Get-ChildItem (join-path $BasedDirectory "Scripts") -Include "*.ps1" -Recurse | ForEach {& $_.FullName}
 
 $script:MainWindow = Load-Xaml
-if ($MainWindow.ShowDialog() -eq $true)
+
+if ($MainWindow.ShowDialog() -eq $False)
 {
-    cls
-    write-host コマンドプロンプトの画面が自動で閉じるまでしばらくお待ちください...
-    Create-BuildPeBatch
-	start-process "cmd" -argumentlist ("/c","""",$BuildPeBatPath,"""") -verb runas -wait
-	#start-process "explorer" -argumentlist ("/n,/select,""{0}""" -f $BuildPeBatPath)
-	start-process "explorer" -argumentlist ("/n,/select,""{0}""" -f $BuildedWindowsPePath)
+	write-host "キャンセルされました"
 }
+
 
 

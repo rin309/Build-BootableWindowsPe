@@ -1,0 +1,15 @@
+@rem * "展開およびイメージング ツール環境"で実行したことにする
+cd /d "%DeploymentToolsPath%"
+call "%DandISetEnvPath%"
+
+@rem ** マウントしたイメージを保存する
+Dism /Unmount-Image /mountdir:"%PeDirectory%\mount" /Discard
+
+rd "%PeDirectory%\media" /s /q
+rd "%PeDirectory%\mount" /s /q
+rd "%PeDirectory%" /s /q
+
+@rem * 大掃除
+@rem dism /cleanup-wim
+@rem dism /cleanup-mountpoints
+

@@ -13,6 +13,8 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
     </Style>
 
+    <Thickness x:Key="NormalThickness">20,5</Thickness>
+    <Thickness x:Key="GroupThickness">20,10,20,20</Thickness>
 
     <Style x:Key="BackButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="Height" Value="42"/>

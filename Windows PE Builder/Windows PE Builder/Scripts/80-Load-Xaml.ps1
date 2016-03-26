@@ -195,8 +195,27 @@ Function global:Load-Xaml()
     })
     $SaveButton = $MainWindow.FindName("SaveButton")
     $SaveButton.Add_Click({
-        $MainWindow.DialogResult = $true
-        $MainWindow.Close()
+		$SaveButton = $MainWindow.FindName("SaveButton")
+		$SaveButton.IsEnabled = $False
+		$MainWindow.FindName("IndicatorRoot").Visibility = [System.Windows.Visibility]::Visible
+        Begin-CreateBuildPeBatch
+    })
+
+    $SaveButton = $MainWindow.FindName("CancelButton")
+    $SaveButton.Add_Click({
+        Remove-Item $BuildedWindowsPePath
+		$MainWindow.FindName("CancelButton").Visibility = [System.Windows.Visibility]::Collapsed
+    })
+	
+    $SaveButton = $MainWindow.FindName("AgreeButton")
+    $SaveButton.Add_Click({
+		$MainWindow.FindName("EulaRoot").Visibility = [System.Windows.Visibility]::Collapsed
+    })
+	
+    $SaveButton = $MainWindow.FindName("ExitButton")
+    $SaveButton.Add_Click({
+		$MainWindow.DialogResult = $False
+		$MainWindow.Close() 
     })
 
     $MainWindow.FindName("WindowsAdkPathTextBox").Text = Extis-Path($WinAdkPath)
