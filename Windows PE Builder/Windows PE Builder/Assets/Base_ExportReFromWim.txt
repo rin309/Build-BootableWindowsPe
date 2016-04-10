@@ -1,0 +1,22 @@
+@rem * "展開およびイメージング ツール環境"で実行したことにする
+cd /d "%DeploymentToolsPath%"
+call "%DandISetEnvPath%"
+
+md "%PeDirectory%\mount"
+
+@rem ** イメージをマウントする
+Dism /mount-image /ReadOnly /imagefile:"%WindowsInstallWimPath%" /index:1 /mountdir:"%PeDirectory%\mount"
+
+copy /y "%PeDirectory%\mount\windows\system32\recovery\winre.wim" "%CopyWimFilePath%"
+
+@rem ** マウントしたイメージを保存する
+Dism /Unmount-Image /mountdir:"%PeDirectory%\mount" /discard
+
+rd "%PeDirectory%\media" /s /q
+rd "%PeDirectory%\mount" /s /q
+rd "%PeDirectory%" /s /q
+
+@rem * 大掃除
+@rem dism /cleanup-wim
+@rem dism /cleanup-mountpoints
+

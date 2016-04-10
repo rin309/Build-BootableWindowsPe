@@ -3,7 +3,7 @@
 #
 
 $script:ApplicationTitle = "Windows PE環境の構築"
-$script:LastUpdated = "2016/3/26"
+$script:LastUpdated = "2016/4/10"
 $script:Author = "morokoshidog"
 
 Add-Type -AssemblyName PresentationFramework
@@ -26,6 +26,10 @@ $script:MainWindow = Load-Xaml
 if ($MainWindow.ShowDialog() -eq $False)
 {
 	write-host "キャンセルされました"
+}
+else
+{
+	Begin-CreateBuildPeBatch
 }
 
 

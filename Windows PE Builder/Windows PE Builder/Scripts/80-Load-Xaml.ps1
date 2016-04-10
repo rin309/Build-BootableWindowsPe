@@ -16,13 +16,16 @@ Function global:Check-SaveAvailable($MainWindow)
     $SavePathTextBox = $MainWindow.FindName("SavePathTextBox")
     $ProjectPathTextBox = $MainWindow.FindName("ProjectPathTextBox")
     
+    $ExportWindowsReImageButton = $MainWindow.FindName("ExportWindowsReImageButton")
     $SaveButton = $MainWindow.FindName("SaveButton")
     if (($WindowsAdkPathTextBox.Text -ne "") -and ($SavePathTextBox.Text -ne "") -and ($ProjectPathTextBox.Text -ne ""))
     {
+        $ExportWindowsReImageButton.IsEnabled = $true
         $SaveButton.IsEnabled = $true
     }
     else
     {
+        $ExportWindowsReImageButton.IsEnabled = $false
         $SaveButton.IsEnabled = $false
     }
 }
@@ -110,19 +113,127 @@ Function global:Open-Browser($Uri)
 
 }
 
+function global:InitializingAdkComBox()
+{
+	$IsAdkInstalledEnvironment = $false
+	$IsMultipleAdkEnvironment = $false
+
+	# 使用中のプラットフォームによる差異を確認
+	if ([Environment]::Is64BitProcess -eq $true)
+	{
+		if ((Test-Path -Path HKLM:"SOFTWARE\Wow6432Node\Microsoft\Windows Kits\Installed Roots") -eq $true)
+		{
+			$KitsRoot = $(Get-ItemProperty -Path HKLM:"SOFTWARE\Wow6432Node\Microsoft\Windows Kits\Installed Roots").KitsRoot
+			if ($KitsRoot -ne $null)
+			{
+				$MainWindow.FindName("Adk8ComboBoxItem").Tag = $KitsRoot
+				$IsAdkInstalledEnvironment = $true
+				$MainWindow.FindName("SelectAdkComboBox").SelectedItem = $MainWindow.FindName("Adk8ComboBoxItem")
+			}
+			else
+			{
+				$MainWindow.FindName("Adk8ComboBoxItem").Visibility = [System.Windows.Visibility]::Collapsed
+			}
+			$KitsRoot = $(Get-ItemProperty -Path HKLM:"SOFTWARE\Wow6432Node\Microsoft\Windows Kits\Installed Roots").KitsRoot81
+			if ($KitsRoot -ne $null)
+			{
+				$MainWindow.FindName("Adk81ComboBoxItem").Tag = $KitsRoot
+				if ($IsAdkInstalledEnvironment -eq $true)
+				{
+					$IsMultipleAdkEnvironment = $true
+				}
+				$IsAdkInstalledEnvironment = $true
+				$MainWindow.FindName("SelectAdkComboBox").SelectedItem = $MainWindow.FindName("Adk81ComboBoxItem")
+			}
+			else
+			{
+				$MainWindow.FindName("Adk81ComboBoxItem").Visibility = [System.Windows.Visibility]::Collapsed
+			}
+			$KitsRoot = $(Get-ItemProperty -Path HKLM:"SOFTWARE\Wow6432Node\Microsoft\Windows Kits\Installed Roots").KitsRoot10
+			if ($KitsRoot -ne $null)
+			{
+				$MainWindow.FindName("Adk10ComboBoxItem").Tag = $KitsRoot
+				if ($IsAdkInstalledEnvironment -eq $true)
+				{
+					$IsMultipleAdkEnvironment = $true
+				}
+				$MainWindow.FindName("SelectAdkComboBox").SelectedItem = $MainWindow.FindName("Adk10ComboBoxItem")
+			}
+			else
+			{
+				$MainWindow.FindName("Adk10ComboBoxItem").Visibility = [System.Windows.Visibility]::Collapsed
+			}
+		}
+	}
+	else
+	{
+		if ((Test-Path -Path HKLM:"SOFTWARE\Microsoft\Windows Kits\Installed Roots") -eq $true)
+		{
+			$KitsRoot = $(Get-ItemProperty -Path HKLM:"SOFTWARE\Microsoft\Windows Kits\Installed Roots").KitsRoot
+			if ($KitsRoot -ne $null)
+			{
+				$MainWindow.FindName("Adk8ComboBoxItem").Tag = $KitsRoot
+				$IsAdkInstalledEnvironment = $true
+				$MainWindow.FindName("SelectAdkComboBox").SelectedItem = $MainWindow.FindName("Adk8ComboBoxItem")
+			}
+			else
+			{
+				$MainWindow.FindName("Adk8ComboBoxItem").Visibility = [System.Windows.Visibility]::Collapsed
+			}
+			$KitsRoot = $(Get-ItemProperty -Path HKLM:"SOFTWARE\Microsoft\Windows Kits\Installed Roots").KitsRoot81
+			if ($KitsRoot -ne $null)
+			{
+				$MainWindow.FindName("Adk81ComboBoxItem").Tag = $KitsRoot
+				if ($IsAdkInstalledEnvironment -eq $true)
+				{
+					$IsMultipleAdkEnvironment = $true
+				}
+				$IsAdkInstalledEnvironment = $true
+				$MainWindow.FindName("SelectAdkComboBox").SelectedItem = $MainWindow.FindName("Adk81ComboBoxItem")
+			}
+			else
+			{
+				$MainWindow.FindName("Adk81ComboBoxItem").Visibility = [System.Windows.Visibility]::Collapsed
+			}
+			$KitsRoot = $(Get-ItemProperty -Path HKLM:"SOFTWARE\Microsoft\Windows Kits\Installed Roots").KitsRoot10
+			if ($KitsRoot -ne $null)
+			{
+				$MainWindow.FindName("Adk10ComboBoxItem").Tag = $KitsRoot
+				if ($IsAdkInstalledEnvironment -eq $true)
+				{
+					$IsMultipleAdkEnvironment = $true
+				}
+				$MainWindow.FindName("SelectAdkComboBox").SelectedItem = $MainWindow.FindName("Adk10ComboBoxItem")
+			}
+			else
+			{
+				$MainWindow.FindName("Adk10ComboBoxItem").Visibility = [System.Windows.Visibility]::Collapsed
+			}
+		}
+	}
+
+	if ($IsMultipleAdkEnvironment -eq $false)
+	{
+		$MainWindow.FindName("SelectAdkRoot").Visibility = [System.Windows.Visibility]::Collapsed
+	}
+}
+
+
 
 Function global:Load-Xaml()
 {
-    #$ThemeResource = Read-Xaml("Assets/ThemeResource.xaml")
-    #$StyleResource = Read-Xaml("Assets/StyleResource.xaml")
-    #$NavigationTabResource = Read-Xaml("Assets/NavigationTabResource.xaml")
-    
     $global:MainWindow = Read-Xaml("View/MainWindow.xaml")
 
     $WindowsAdkPathButton = $MainWindow.FindName("WindowsAdkPathButton")
     $WindowsAdkPathButton.Add_Click({
         $WindowsAdkPathTextBox = $MainWindow.FindName("WindowsAdkPathTextBox")
         Select-Folder($WindowsAdkPathTextBox)
+        Check-SaveAvailable($MainWindow)
+    })
+    $WimPathButton = $MainWindow.FindName("WimPathButton")
+    $WimPathButton.Add_Click({
+        $WimPathTextBox = $MainWindow.FindName("WimPathTextBox")
+        Save-File $WimPathTextBox "WIMファイル (*.wim)|*.wim"
         Check-SaveAvailable($MainWindow)
     })
     $Option1PathButton = $MainWindow.FindName("Option1PathButton")
@@ -174,6 +285,9 @@ Function global:Load-Xaml()
     $MainWindow.FindName("Hyperlink112").Add_Click({
         Open-Browser($MainWindow.FindName("Hyperlink112").NavigateUri)
     })
+    $MainWindow.FindName("AboutHyperlink").Add_Click({
+        Open-Browser($MainWindow.FindName("AboutHyperlink").NavigateUri)
+    })
 
 	#Windows RE
 	<#$MainWindow.FindName("SupportWindowsReCheckBox").Add_Checked({Check-WindowsPeFeature $MainWindow.FindName("SupportWindowsReCheckBox").IsChecked $MainWindow.FindName("SupportPsCheckBox").IsChecked })
@@ -198,7 +312,12 @@ Function global:Load-Xaml()
 		$SaveButton = $MainWindow.FindName("SaveButton")
 		$SaveButton.IsEnabled = $False
 		$MainWindow.FindName("IndicatorRoot").Visibility = [System.Windows.Visibility]::Visible
-        Begin-CreateBuildPeBatch
+        $MainWindow.Close
+    })
+
+    $ExportWindowsReImageButton = $MainWindow.FindName("ExportWindowsReImageButton")
+    $ExportWindowsReImageButton.Add_Click({
+		Begin-CopyWindowsReBatch
     })
 
     $SaveButton = $MainWindow.FindName("CancelButton")
@@ -217,8 +336,12 @@ Function global:Load-Xaml()
 		$MainWindow.DialogResult = $False
 		$MainWindow.Close() 
     })
+	
+    $SelectAdkComboBox = $MainWindow.FindName("SelectAdkComboBox")
+    $SelectAdkComboBox.Add_SelectionChanged({
+		$MainWindow.FindName("WindowsAdkPathTextBox").Text = Extis-Path($MainWindow.FindName("SelectAdkComboBox").SelectedItem.Tag)
+    })
 
-    $MainWindow.FindName("WindowsAdkPathTextBox").Text = Extis-Path($WinAdkPath)
     $MainWindow.FindName("Option1PathTextBox").Text = $global:GhostPath
     $MainWindow.FindName("Option2PathTextBox").Text = $global:Option2Path
     $MainWindow.FindName("ProjectPathTextBox").Text = $global:ProjectDirectoryPath
@@ -230,6 +353,7 @@ Function global:Load-Xaml()
     $MainWindow.FindName("ApplicationLastUpdatedTextBlock").Text = $LastUpdated
     $MainWindow.FindName("AuthorTextBlock").Text = $Author
 
+	InitializingAdkComBox
 
     return $MainWindow
 }

@@ -2,8 +2,11 @@
 cd /d "%DeploymentToolsPath%"
 call "%DandISetEnvPath%"
 
-@rem * Ghostを含む起動可能なWindows PEイメージを作成する
+@rem * 起動可能なWindows PEイメージを作成する
 call copype %MsPlatformId% "%PeDirectory%"
+
+@rem ** WIMファイルの選択があればあらかじめコピーをする
+%Support-CopyWimFile%copy /y "%CopyWimFilePath%" "%PeDirectory%\media\sources\boot.wim"
 
 @rem ** イメージをマウントする
 Dism /mount-image /imagefile:"%PeDirectory%\media\sources\boot.wim" /index:1 /mountdir:"%PeDirectory%\mount"
@@ -91,9 +94,9 @@ Dism /Unmount-Image /mountdir:"%PeDirectory%\mount" /Commit
 del "%PeDirectory%\media\Boot\bootfix.bin"
 del "%PeDirectory%\media\Boot\bootfix.bin"
 del "%PeDirectory%\fwfiles\efisys.bin"
-copy "%EfisysNoPromptPath%" "%PeDirectory%\fwfiles\efisys.bin"
+copy /y "%EfisysNoPromptPath%" "%PeDirectory%\fwfiles\efisys.bin"
 
-@rem ** Ghostを含む起動可能なWindows PEイメージを選択した場所に保存する
+@rem ** 起動可能なWindows PEイメージを選択した場所に保存する
 call Makewinpemedia /iso "%PeDirectory%" "%BuildedWindowsPePath%"
 
 rd "%PeDirectory%\media" /s /q

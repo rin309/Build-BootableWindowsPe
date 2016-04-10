@@ -28,6 +28,8 @@ Function global:Replace-BuilderEnvironment($Base)
     $global:BuildedWindowsPePath = $MainWindow.FindName("SavePathTextBox").Text
     $global:BuildedWindowsPePath = $BuildedWindowsPePath.Replace("%PlatformId%",$PlatformId)
 
+	$global:WinAdkPath = $MainWindow.FindName("WindowsAdkPathTextBox").Text
+
     # ADK関連のパス を選択肢の通りに直す
     $DeploymentToolsPath = Join-Path $WinAdkPath $DeploymentToolsPath
     $DandISetEnvPath = Join-Path $DeploymentToolsPath $DandISetEnvPath
@@ -61,9 +63,15 @@ Function global:Replace-BuilderEnvironment($Base)
     $Base = $Base.Replace("%PeDirectory%", $PeDirectory)
     $Base = $Base.Replace("%BuildedWindowsPePath%", $BuildedWindowsPePath)
     $Base = $Base.Replace("%Support-Option1%", $Option1)
+    $Base = $Base.Replace("%Support-Option1%", $Option1)
     $Base = $Base.Replace("%Option1Path%", $Option1Path)
     $Base = $Base.Replace("%Support-Option2%", $Option2)
     $Base = $Base.Replace("%Option2Path%", $Option2Path)
+	
+	$Base = $Base.Replace("%WindowsInstallWimPath%", $WindowsInstallWimPath)
+    $Base = $Base.Replace("%Support-CopyWimFile%", (Check-Boolean-ForWriteCommand($CopyWimFilePath.Length -eq 0)))
+    $Base = $Base.Replace("%CopyWimFilePath%", $CopyWimFilePath)
+	
 
     #オプション
     $Base = $Base.Replace("%Support-WinPE-WMI%", (Check-Boolean-ForWriteCommand($MainWindow.FindName("SupportWmiCheckBox").IsChecked)))
@@ -144,6 +152,7 @@ Function global:Begin-CreateBuildPeBatch
 {
 #$global:MainWindow.Dispather.BeginInvoke(
 #[Action[string]] {
+		$CopyWimFilePath = $MainWindow.FindName("WimPathTextBox").Text
 		Create-BuildPeBatch
 		start-process "cmd" -argumentlist ("/c","""",$LastBuildPeBatPath,"""") -verb runas -wait
 
@@ -164,4 +173,45 @@ Function global:Begin-CreateBuildPeBatch
 	$MainWindow.FindName("SaveButton").IsEnabled = $True
 	$MainWindow.FindName("CancelButton").Visibility = [System.Windows.Visibility]::Visible
 	$MainWindow.FindName("IndicatorRoot").Visibility = [System.Windows.Visibility]::Collapsed
+}
+
+Function global:Create-CopyWindowsReBatch
+{
+    # 読み込み
+    $BaseBatchPath = Join-Path $BasedDirectory $BaseExportReFromWimPath
+    $BaseBatch = Get-Content -Path $BaseBatchPath -Raw
+	$BaseBatch = Replace-BuilderEnvironment $BaseBatch
+    $global:LastBuildPeBatPath = Join-Path $global:ProjectDirectoryPath $ExportReBatPath 
+    Out-File -InputObject $BaseBatch -FilePath $global:LastBuildPeBatPath -Encoding default
+}
+
+Function global:Begin-CopyWindowsReBatch
+{
+    $OpenFileDialog = New-Object System.Windows.Forms.OpenFileDialog
+    #$OpenFileDialog.Filter = "Windowsインストールイメージ|install.wim;install.esd"
+	$OpenFileDialog.Filter = "Windowsインストールイメージ|install.wim"
+    if($OpenFileDialog.ShowDialog() -ne "OK")
+    {
+        return
+    }
+
+	$Global:WindowsInstallWimPath = $OpenFileDialog.FileName
+
+    $SaveFileDialog = New-Object System.Windows.Forms.SaveFileDialog
+    $SaveFileDialog.Filter = "WIMファイル (*.wim)|*.wim"
+    if($SaveFileDialog.ShowDialog() -eq "OK")
+    {
+		$CopyWimFilePath = $SaveFileDialog.FileName
+		Create-CopyWindowsReBatch
+		start-process "cmd" -argumentlist ("/c","""",$LastBuildPeBatPath,"""") -verb runas -wait
+
+		if ((Test-Path -Path $LastBuildPeBatPath) -eq $true)
+		{
+			start-process "explorer" -argumentlist ("/n,/select,""{0}""" -f $CopyWimFilePath)
+			$MainWindow.FindName("WimPathTextBox").Text = $CopyWimFilePath
+		}
+        
+    }
+
+
 }
