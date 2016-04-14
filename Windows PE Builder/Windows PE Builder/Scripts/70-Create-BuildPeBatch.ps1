@@ -71,8 +71,8 @@ Function global:Replace-BuilderEnvironment($Base)
     $Base = $Base.Replace("%Support-WindowsInstallEsd%", (Check-Boolean-ForWriteCommand($Global:WindowsInstallEsdPath.Length -ne 0)))
 	$Base = $Base.Replace("%WindowsInstallEsdPath%", $Global:WindowsInstallEsdPath)
 	$Base = $Base.Replace("%WindowsInstallWimPath%", $Global:WindowsInstallWimPath)
-    $Base = $Base.Replace("%Support-CopyWimFile%", (Check-Boolean-ForWriteCommand($CopyWimFilePath.Length -eq 0)))
-    $Base = $Base.Replace("%CopyWimFilePath%", $CopyWimFilePath)
+    $Base = $Base.Replace("%Support-CopyWimFile%", (Check-Boolean-ForWriteCommand($Global:CopyWimFilePath.Length -ne 0)))
+    $Base = $Base.Replace("%CopyWimFilePath%", $Global:CopyWimFilePath)
 	
 
     #ƒIƒvƒVƒ‡ƒ“
@@ -155,7 +155,7 @@ Function global:Begin-CreateBuildPeBatch
 {
 #$Global:MainWindow.Dispather.BeginInvoke(
 #[Action[string]] {
-		$CopyWimFilePath = $MainWindow.FindName("WimPathTextBox").Text
+		$Global:CopyWimFilePath = $MainWindow.FindName("WimPathTextBox").Text
 		Create-BuildPeBatch
 		start-process "cmd" -argumentlist ("/c","""",$LastBuildPeBatPath,"""") -verb runas -wait
 
