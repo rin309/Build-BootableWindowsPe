@@ -1,22 +1,27 @@
-@rem * "“WŠJ‚¨‚æ‚ÑƒCƒ[ƒWƒ“ƒO ƒc[ƒ‹ŠÂ‹«"‚ÅÀs‚µ‚½‚±‚Æ‚É‚·‚é
+ï»¿@rem * "å±•é–‹ãŠã‚ˆã³ã‚¤ãƒ¡ãƒ¼ã‚¸ãƒ³ã‚° ãƒ„ãƒ¼ãƒ«ç’°å¢ƒ"ã§å®Ÿè¡Œã—ãŸã“ã¨ã«ã™ã‚‹
 cd /d "%DeploymentToolsPath%"
 call "%DandISetEnvPath%"
 
 md "%PeDirectory%\mount"
 
-@rem ** ƒCƒ[ƒW‚ğƒ}ƒEƒ“ƒg‚·‚é
+@rem ** ã‚¤ãƒ¡ãƒ¼ã‚¸ã‚’ãƒã‚¦ãƒ³ãƒˆã™ã‚‹
+%Support-WindowsInstallEsd%Dism /Export-Image /SourceImageFile:"%WindowsInstallEsdPath%" /SourceIndex:1 /DestinationImageFile:"%WindowsInstallWimPath%" /Compress:Max /CheckIntegrity
+%Support-WindowsInstallEsd%Dism /Get-WimInfo /Wimfile:"%WindowsInstallWimPath%"
 Dism /mount-image /ReadOnly /imagefile:"%WindowsInstallWimPath%" /index:1 /mountdir:"%PeDirectory%\mount"
 
+attrib -h -s "%PeDirectory%\mount\windows\system32\recovery\winre.wim"
 copy /y "%PeDirectory%\mount\windows\system32\recovery\winre.wim" "%CopyWimFilePath%"
 
-@rem ** ƒ}ƒEƒ“ƒg‚µ‚½ƒCƒ[ƒW‚ğ•Û‘¶‚·‚é
+@rem ** ãƒã‚¦ãƒ³ãƒˆã—ãŸã‚¤ãƒ¡ãƒ¼ã‚¸ã‚’ä¿å­˜ã™ã‚‹
 Dism /Unmount-Image /mountdir:"%PeDirectory%\mount" /discard
+
+del "%WindowsInstallWimPath%"
 
 rd "%PeDirectory%\media" /s /q
 rd "%PeDirectory%\mount" /s /q
 rd "%PeDirectory%" /s /q
 
-@rem * ‘å‘|œ
+@rem * å¤§æƒé™¤
 @rem dism /cleanup-wim
 @rem dism /cleanup-mountpoints
 

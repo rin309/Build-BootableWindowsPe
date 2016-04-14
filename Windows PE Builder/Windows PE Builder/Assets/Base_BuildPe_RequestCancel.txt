@@ -1,15 +1,15 @@
-@rem * "“WŠJ‚¨‚æ‚ÑƒCƒ[ƒWƒ“ƒO ƒc[ƒ‹ŠÂ‹«"‚ÅÀs‚µ‚½‚±‚Æ‚É‚·‚é
+ï»¿@rem * "å±•é–‹ãŠã‚ˆã³ã‚¤ãƒ¡ãƒ¼ã‚¸ãƒ³ã‚° ãƒ„ãƒ¼ãƒ«ç’°å¢ƒ"ã§å®Ÿè¡Œã—ãŸã“ã¨ã«ã™ã‚‹
 cd /d "%DeploymentToolsPath%"
 call "%DandISetEnvPath%"
 
-@rem ** ƒ}ƒEƒ“ƒg‚µ‚½ƒCƒ[ƒW‚ğ•Û‘¶‚·‚é
+@rem ** ãƒã‚¦ãƒ³ãƒˆã—ãŸã‚¤ãƒ¡ãƒ¼ã‚¸ã‚’ä¿å­˜ã™ã‚‹
 Dism /Unmount-Image /mountdir:"%PeDirectory%\mount" /Discard
 
 rd "%PeDirectory%\media" /s /q
 rd "%PeDirectory%\mount" /s /q
 rd "%PeDirectory%" /s /q
 
-@rem * ‘å‘|œ
+@rem * å¤§æƒé™¤
 @rem dism /cleanup-wim
 @rem dism /cleanup-mountpoints
 

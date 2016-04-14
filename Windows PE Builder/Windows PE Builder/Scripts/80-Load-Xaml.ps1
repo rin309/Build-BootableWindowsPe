@@ -222,7 +222,7 @@ function global:InitializingAdkComBox()
 
 Function global:Load-Xaml()
 {
-    $global:MainWindow = Read-Xaml("View/MainWindow.xaml")
+    $Global:MainWindow = Read-Xaml("View/MainWindow.xaml")
 
     $WindowsAdkPathButton = $MainWindow.FindName("WindowsAdkPathButton")
     $WindowsAdkPathButton.Add_Click({
@@ -233,7 +233,7 @@ Function global:Load-Xaml()
     $WimPathButton = $MainWindow.FindName("WimPathButton")
     $WimPathButton.Add_Click({
         $WimPathTextBox = $MainWindow.FindName("WimPathTextBox")
-        Save-File $WimPathTextBox "WIMファイル (*.wim)|*.wim"
+        Open-File $WimPathTextBox "WIMファイル (*.wim)|*.wim"
         Check-SaveAvailable($MainWindow)
     })
     $Option1PathButton = $MainWindow.FindName("Option1PathButton")
@@ -312,7 +312,8 @@ Function global:Load-Xaml()
 		$SaveButton = $MainWindow.FindName("SaveButton")
 		$SaveButton.IsEnabled = $False
 		$MainWindow.FindName("IndicatorRoot").Visibility = [System.Windows.Visibility]::Visible
-        $MainWindow.Close
+		$MainWindow.DialogResult = $True
+		$MainWindow.Close() 
     })
 
     $ExportWindowsReImageButton = $MainWindow.FindName("ExportWindowsReImageButton")
@@ -342,9 +343,9 @@ Function global:Load-Xaml()
 		$MainWindow.FindName("WindowsAdkPathTextBox").Text = Extis-Path($MainWindow.FindName("SelectAdkComboBox").SelectedItem.Tag)
     })
 
-    $MainWindow.FindName("Option1PathTextBox").Text = $global:GhostPath
-    $MainWindow.FindName("Option2PathTextBox").Text = $global:Option2Path
-    $MainWindow.FindName("ProjectPathTextBox").Text = $global:ProjectDirectoryPath
+    $MainWindow.FindName("Option1PathTextBox").Text = $Global:GhostPath
+    $MainWindow.FindName("Option2PathTextBox").Text = $Global:Option2Path
+    $MainWindow.FindName("ProjectPathTextBox").Text = $Global:ProjectDirectoryPath
 
     Check-SaveAvailable($MainWindow)
 

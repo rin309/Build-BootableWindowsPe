@@ -4,24 +4,24 @@
 
 # スクリプトがあるフォルダー
 $script:ProjectDirectoryPath = ""
-$global:BuildedWindowsPePath = "WindowsPE-%PlatformId%.iso"
-$global:BaseBatchPath = "assets\Base_BuildPe.txt"
-$global:CancelBatchPath = "assets\Base_BuildPe_RequestCancel.txt"
-$global:BaseExportReFromWimPath = "assets\Base_ExportReFromWim.txt"
+$Global:BuildedWindowsPePath = "WindowsPE-%PlatformId%.iso"
+$Global:BaseBatchPath = "assets\Base_BuildPe.txt"
+$Global:CancelBatchPath = "assets\Base_BuildPe_RequestCancel.txt"
+$Global:BaseExportReFromWimPath = "assets\Base_ExportReFromWim.txt"
 
 # Build-Peコマンドのパス
-$global:BuildPeBatPath = "Build-Pe.bat"
-$global:CleanUpPeBatPath = "CleanUp-BuildedPe.bat"
-$global:ExportReBatPath = "Export-WindowsRe.bat"
+$Global:BuildPeBatPath = "Build-Pe.bat"
+$Global:CleanUpPeBatPath = "CleanUp-BuildedPe.bat"
+$Global:ExportReBatPath = "Export-WindowsRe.bat"
 
 # ADK関連のパス
-$global:DeploymentToolsPath = "Assessment and Deployment Kit\Deployment Tools\"
-$global:DandISetEnvPath = "DandISetEnv.bat"
-$global:WinPePath = "Assessment and Deployment Kit\Windows Preinstallation Environment\"
-$global:WinPeOcsDirectoryPath = "WinPE_OCs\"
-$global:EfisysNoPromptPath = "Oscdimg\efisys_noprompt.bin"
-$global:CopyPePath = "copype.cmd"
-$global:MakeWinPEMediaPath = "MakeWinPEMedia.cmd"
+$Global:DeploymentToolsPath = "Assessment and Deployment Kit\Deployment Tools\"
+$Global:DandISetEnvPath = "DandISetEnv.bat"
+$Global:WinPePath = "Assessment and Deployment Kit\Windows Preinstallation Environment\"
+$Global:WinPeOcsDirectoryPath = "WinPE_OCs\"
+$Global:EfisysNoPromptPath = "Oscdimg\efisys_noprompt.bin"
+$Global:CopyPePath = "copype.cmd"
+$Global:MakeWinPEMediaPath = "MakeWinPEMedia.cmd"
 
 
 
@@ -30,15 +30,15 @@ if ([Environment]::Is64BitProcess -eq $true)
 {
     if ((Test-Path -Path HKLM:SOFTWARE\Wow6432Node\Symantec\Ghost) -eq $true)
     {
-        $global:GhostPath = $(Get-ItemProperty -Path HKLM:SOFTWARE\Wow6432Node\Symantec\Ghost).InstallDir
-        $global:GhostPath = Join-Path $global:GhostPath "bootwiz\OEM\GSS\winpe\%PlatformId%\Base\mount"
+        $Global:GhostPath = $(Get-ItemProperty -Path HKLM:SOFTWARE\Wow6432Node\Symantec\Ghost).InstallDir
+        $Global:GhostPath = Join-Path $Global:GhostPath "bootwiz\OEM\GSS\winpe\%PlatformId%\Base\mount"
     }
 }
 else
 {
     if ((Test-Path -Path HKLM:SOFTWARE\Symantec\Ghost) -eq $true)
     {
-        $global:GhostPath = $(Get-ItemProperty -Path HKLM:SOFTWARE\Symantec\Ghost).InstallDir
-        $global:GhostPath = Join-Path $global:GhostPath "bootwiz\OEM\GSS\winpe\%PlatformId%\Base\mount"
+        $Global:GhostPath = $(Get-ItemProperty -Path HKLM:SOFTWARE\Symantec\Ghost).InstallDir
+        $Global:GhostPath = Join-Path $Global:GhostPath "bootwiz\OEM\GSS\winpe\%PlatformId%\Base\mount"
     }
 }

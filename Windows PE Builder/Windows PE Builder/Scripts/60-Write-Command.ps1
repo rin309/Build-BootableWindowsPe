@@ -4,7 +4,7 @@
 
 Function global:Write-Command($Line)
 {
-    $CommandPath = Join-Path $global:ProjectDirectoryPath $BuildPePath 
+    $CommandPath = Join-Path $Global:ProjectDirectoryPath $BuildPePath 
     Out-File -InputObject $Line -FilePath $CommandPath -Append
 }
 

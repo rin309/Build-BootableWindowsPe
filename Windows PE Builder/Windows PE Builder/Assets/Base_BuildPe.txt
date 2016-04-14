@@ -1,24 +1,24 @@
-@rem * "“WŠJ‚¨‚æ‚ÑƒCƒ[ƒWƒ“ƒO ƒc[ƒ‹ŠÂ‹«"‚ÅÀs‚µ‚½‚±‚Æ‚É‚·‚é
+ï»¿@rem * "å±•é–‹ãŠã‚ˆã³ã‚¤ãƒ¡ãƒ¼ã‚¸ãƒ³ã‚° ãƒ„ãƒ¼ãƒ«ç’°å¢ƒ"ã§å®Ÿè¡Œã—ãŸã“ã¨ã«ã™ã‚‹
 cd /d "%DeploymentToolsPath%"
 call "%DandISetEnvPath%"
 
-@rem * ‹N“®‰Â”\‚ÈWindows PEƒCƒ[ƒW‚ğì¬‚·‚é
+@rem * èµ·å‹•å¯èƒ½ãªWindows PEã‚¤ãƒ¡ãƒ¼ã‚¸ã‚’ä½œæˆã™ã‚‹
 call copype %MsPlatformId% "%PeDirectory%"
 
-@rem ** WIMƒtƒ@ƒCƒ‹‚Ì‘I‘ğ‚ª‚ ‚ê‚Î‚ ‚ç‚©‚¶‚ßƒRƒs[‚ğ‚·‚é
+@rem ** WIMãƒ•ã‚¡ã‚¤ãƒ«ã®é¸æŠãŒã‚ã‚Œã°ã‚ã‚‰ã‹ã˜ã‚ã‚³ãƒ”ãƒ¼ã‚’ã™ã‚‹
 %Support-CopyWimFile%copy /y "%CopyWimFilePath%" "%PeDirectory%\media\sources\boot.wim"
 
-@rem ** ƒCƒ[ƒW‚ğƒ}ƒEƒ“ƒg‚·‚é
+@rem ** ã‚¤ãƒ¡ãƒ¼ã‚¸ã‚’ãƒã‚¦ãƒ³ãƒˆã™ã‚‹
 Dism /mount-image /imagefile:"%PeDirectory%\media\sources\boot.wim" /index:1 /mountdir:"%PeDirectory%\mount"
 
-@rem ** ƒCƒ[ƒW‚ğC³‚·‚é
-@rem *** ƒIƒvƒVƒ‡ƒ“1‚ğƒRƒs[‚·‚é
+@rem ** ã‚¤ãƒ¡ãƒ¼ã‚¸ã‚’ä¿®æ­£ã™ã‚‹
+@rem *** ã‚ªãƒ—ã‚·ãƒ§ãƒ³1ã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹
 %Support-Option1%xcopy /e /r /c /h /y "%Option1Path%\*" "%PeDirectory%\mount"
 
-@rem *** ƒIƒvƒVƒ‡ƒ“2‚ğƒRƒs[‚·‚é
+@rem *** ã‚ªãƒ—ã‚·ãƒ§ãƒ³2ã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹
 %Support-Option2%xcopy /e /r /c /h /y "%Option2Path%\*" "%PeDirectory%"
 
-@rem *** ’Ç‰Á‚ÌƒpƒbƒP[ƒW‚ğƒCƒ“ƒXƒg[ƒ‹
+@rem *** è¿½åŠ ã®ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«
 %Support-WinPE-WMI%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-WMI.cab"
 %Support-WinPE-NetFx%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-NetFx.cab"
 %Support-WinPE-Scripting%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-Scripting.cab"
@@ -73,37 +73,38 @@ Dism /mount-image /imagefile:"%PeDirectory%\media\sources\boot.wim" /index:1 /mo
 %Support-Japanese-WinPE-WinReCfg_ja-jp%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\ja-jp\WinPE-WinReCfg_ja-jp.cab"
 %Support-Japanese-WinPE-WMI_ja-jp%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\ja-jp\WinPE-WMI_ja-jp.cab"
 
-@rem *** “ú–{Œêİ’è
+@rem *** æ—¥æœ¬èªè¨­å®š
 %Support-Japanese%Dism /image:"%PeDirectory%\mount" /set-allintl:ja-jp
 %Support-Japanese%Dism /image:"%PeDirectory%\mount" /set-layereddriver:6
 %Support-Japanese%Bcdedit /store "%PeDirectory%media\Boot\BCD" /set {bootmgr} locale ja-jp
 %Support-Japanese%Bcdedit /store "%PeDirectory%media\Boot\BCD" /set {default} locale ja-jp
 
-@rem *** PXEƒu[ƒg‚É‘Î‰‚·‚é
+@rem *** PXEãƒ–ãƒ¼ãƒˆã«å¯¾å¿œã™ã‚‹
 Bcdedit /store "%PeDirectory%\media\Boot\BCD" /deletevalue {default} bootmenupolicy
 copy "%PeDirectory%\mount\Windows\Boot\PXE\bootmgr.exe" "%PeDirectory%\media\Boot\bootmgr.exe"
 copy "%PeDirectory%\mount\Windows\Boot\PXE\pxeboot.n12" "%PeDirectory\media\Boot\pxeboot.n12"
 
-@rem 64ƒrƒbƒg”ÅWindowsŒü‚¯‚ÅPXEƒu[ƒg‘Î‰‚É‚·‚é‚½‚ß‚ÉUEFI‚Ì‚İ‚É‚·‚é
+@rem 64ãƒ“ãƒƒãƒˆç‰ˆWindowså‘ã‘ã§PXEãƒ–ãƒ¼ãƒˆå¯¾å¿œã«ã™ã‚‹ãŸã‚ã«UEFIã®ã¿ã«ã™ã‚‹
 @rem bcdedit /store "%PeDirectory%\media\Boot\BCD" /set {Default} path \windows\system32\winload.efi
 
-@rem ** ƒ}ƒEƒ“ƒg‚µ‚½ƒCƒ[ƒW‚ğ•Û‘¶‚·‚é
+@rem ** ãƒã‚¦ãƒ³ãƒˆã—ãŸã‚¤ãƒ¡ãƒ¼ã‚¸ã‚’ä¿å­˜ã™ã‚‹
 Dism /Unmount-Image /mountdir:"%PeDirectory%\mount" /Commit
 
-@rem ** uPress any key to boot from CD or DVD...v‚ğ•\¦‚¹‚¸‹N“®‚·‚é
+@rem ** ã€ŒPress any key to boot from CD or DVD...ã€ã‚’è¡¨ç¤ºã›ãšèµ·å‹•ã™ã‚‹
 del "%PeDirectory%\media\Boot\bootfix.bin"
 del "%PeDirectory%\media\Boot\bootfix.bin"
 del "%PeDirectory%\fwfiles\efisys.bin"
 copy /y "%EfisysNoPromptPath%" "%PeDirectory%\fwfiles\efisys.bin"
 
-@rem ** ‹N“®‰Â”\‚ÈWindows PEƒCƒ[ƒW‚ğ‘I‘ğ‚µ‚½êŠ‚É•Û‘¶‚·‚é
+@rem ** èµ·å‹•å¯èƒ½ãªWindows PEã‚¤ãƒ¡ãƒ¼ã‚¸ã‚’é¸æŠã—ãŸå ´æ‰€ã«ä¿å­˜ã™ã‚‹
 call Makewinpemedia /iso "%PeDirectory%" "%BuildedWindowsPePath%"
+explorer /n,/select,"%BuildedWindowsPePath%"
 
 rd "%PeDirectory%\media" /s /q
 rd "%PeDirectory%\mount" /s /q
 rd "%PeDirectory%" /s /q
 
-@rem * ‘å‘|œ
+@rem * å¤§æƒé™¤
 @rem dism /cleanup-wim
 @rem dism /cleanup-mountpoints
 
