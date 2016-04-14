@@ -76,8 +76,8 @@ Dism /mount-image /imagefile:"%PeDirectory%\media\sources\boot.wim" /index:1 /mo
 @rem *** 日本語設定
 %Support-Japanese%Dism /image:"%PeDirectory%\mount" /set-allintl:ja-jp
 %Support-Japanese%Dism /image:"%PeDirectory%\mount" /set-layereddriver:6
-%Support-Japanese%Bcdedit /store "%PeDirectory%media\Boot\BCD" /set {bootmgr} locale ja-jp
-%Support-Japanese%Bcdedit /store "%PeDirectory%media\Boot\BCD" /set {default} locale ja-jp
+%Support-Japanese%Bcdedit /store "%PeDirectory%\media\Boot\BCD" /set {bootmgr} locale ja-jp
+%Support-Japanese%Bcdedit /store "%PeDirectory%\media\Boot\BCD" /set {default} locale ja-jp
 
 @rem *** PXEブートに対応する
 Bcdedit /store "%PeDirectory%\media\Boot\BCD" /deletevalue {default} bootmenupolicy
