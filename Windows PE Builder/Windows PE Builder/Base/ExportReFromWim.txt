@@ -24,4 +24,3 @@ rd "%PeDirectory%" /s /q
 @rem * 大掃除
 @rem dism /cleanup-wim
 @rem dism /cleanup-mountpoints
-
