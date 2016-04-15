@@ -13,10 +13,10 @@ Dism /mount-image /imagefile:"%PeDirectory%\media\sources\boot.wim" /index:1 /mo
 
 @rem ** イメージを修正する
 @rem *** オプション1をコピーする
-%Support-Option1%xcopy /e /r /c /h /y "%Option1Path%\*" "%PeDirectory%\mount"
+%Support-Option1%xcopy /e /r /c /h /y "%Option1Path%\*" "%PeDirectory%\mount\"
 
 @rem *** オプション2をコピーする
-%Support-Option2%xcopy /e /r /c /h /y "%Option2Path%\*" "%PeDirectory%"
+%Support-Option2%xcopy /e /r /c /h /y "%Option2Path%\*" "%PeDirectory%\mount\"
 
 @rem *** 追加のパッケージをインストール
 %Support-WinPE-WMI%DISM /image:"%PeDirectory%\mount" /Add-Package /PackagePath:"%WinPeOcsDirectoryPath%\WinPE-WMI.cab"
@@ -83,6 +83,15 @@ Dism /mount-image /imagefile:"%PeDirectory%\media\sources\boot.wim" /index:1 /mo
 Bcdedit /store "%PeDirectory%\media\Boot\BCD" /deletevalue {default} bootmenupolicy
 copy "%PeDirectory%\mount\Windows\Boot\PXE\bootmgr.exe" "%PeDirectory%\media\Boot\bootmgr.exe"
 copy "%PeDirectory%\mount\Windows\Boot\PXE\pxeboot.n12" "%PeDirectory\media\Boot\pxeboot.n12"
+
+@rem 追加のカスタマイズを行う場合はここにコードを記載する
+@rem pause
+
+@rem 追加済みの機能を確認する
+@rem powershell -command "Get-WindowsOptionalFeature -Path """%PeDirectory%\mount""" | Select FeatureName"
+
+@rem ドライバーの追加
+@rem Dism /Add-Driver /Image:"%PeDirectory%\mount" /Driver:"C:\SampleDriver\driver.inf"
 
 @rem 64ビット版Windows向けでPXEブート対応にするためにUEFIのみにする
 @rem bcdedit /store "%PeDirectory%\media\Boot\BCD" /set {Default} path \windows\system32\winload.efi

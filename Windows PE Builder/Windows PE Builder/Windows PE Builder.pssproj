@@ -28,26 +28,25 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
-    <Folder Include="Assets\x64\" />
-    <Folder Include="Assets\x64\mount\" />
-    <Folder Include="Assets\x64\mount\sources\" />
-    <Folder Include="Assets\x64\mount\sources\recovery\" />
-    <Folder Include="Assets\x64\mount\sources\recovery\tools\" />
-    <Folder Include="Assets\x64\mount\Windows\" />
-    <Folder Include="Assets\x64\mount\Windows\System32\" />
-    <Folder Include="Assets\x86\" />
-    <Folder Include="Assets\x86\mount\" />
-    <Folder Include="Assets\x86\mount\sources\" />
-    <Folder Include="Assets\x86\mount\sources\recovery\" />
-    <Folder Include="Assets\x86\mount\sources\recovery\tools\" />
-    <Folder Include="Assets\x86\mount\Windows\" />
-    <Folder Include="Assets\x86\mount\Windows\System32\" />
+    <Folder Include="Base\" />
+    <Folder Include="Base\x64\" />
+    <Folder Include="Base\x64\sources\" />
+    <Folder Include="Base\x64\sources\recovery\" />
+    <Folder Include="Base\x64\sources\recovery\tools\" />
+    <Folder Include="Base\x64\Windows\" />
+    <Folder Include="Base\x64\Windows\System32\" />
+    <Folder Include="Base\x86\" />
+    <Folder Include="Base\x86\sources\" />
+    <Folder Include="Base\x86\sources\recovery\" />
+    <Folder Include="Base\x86\sources\recovery\tools\" />
+    <Folder Include="Base\x86\Windows\" />
+    <Folder Include="Base\x86\Windows\System32\" />
     <Folder Include="Scripts\" />
     <Folder Include="View\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\x64\mount\Windows\System32\startnet.cmd" />
-    <Compile Include="Assets\x86\mount\Windows\System32\startnet.cmd" />
+    <Compile Include="Base\x64\Windows\System32\startnet.cmd" />
+    <Compile Include="Base\x86\Windows\System32\startnet.cmd" />
     <Compile Include="MainScript.ps1" />
     <Compile Include="Scripts\10-Elevation-ThisScript.ps1" />
     <Compile Include="Scripts\20-Support-Adk.ps1" />
@@ -59,15 +58,15 @@
     <Compile Include="Scripts\80-Load-Xaml.ps1" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Base_ExportReFromWim.txt" />
-    <Content Include="Assets\Base_BuildPe.txt" />
     <Content Include="Assets\IndeterminateResource.xaml" />
     <Content Include="Assets\NavigationTabResource.xaml" />
-    <Content Include="Assets\Base_BuildPe_RequestCancel.txt" />
     <Content Include="Assets\StyleResource.xaml" />
     <Content Include="Assets\ThemeResource.xaml" />
-    <Content Include="Assets\x64\mount\sources\recovery\tools\WinREConfig.xml" />
-    <Content Include="Assets\x86\mount\sources\recovery\tools\WinREConfig.xml" />
+    <Content Include="Base\BuildPe.txt" />
+    <Content Include="Base\BuildPe_RequestCancel.txt" />
+    <Content Include="Base\ExportReFromWim.txt" />
+    <Content Include="Base\x64\sources\recovery\tools\WinREConfig.xml" />
+    <Content Include="Base\x86\sources\recovery\tools\WinREConfig.xml" />
     <Content Include="View\MainWindow.xaml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

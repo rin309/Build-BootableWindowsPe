@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<!-- WinREConfig.xml -->
-<Recovery>
-   <RecoveryTools>
-      <RelativeFilePath>..\..\..\ghost\ghost64.exe</RelativeFilePath>
-      <CommandLineParam>/ib /fdsp</CommandLineParam>
-   </RecoveryTools>
-</Recovery>

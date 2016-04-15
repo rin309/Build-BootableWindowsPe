@@ -213,51 +213,55 @@
                             </Grid>
                         </Button>
                     </Grid>
-                    <TextBlock Margin="0,10,0,0">WindowsインストールイメージからWindows REイメージ(WIMファイル)をコピーする (オプション)</TextBlock>
-                    <Button x:Name="ExportWindowsReImageButton" HorizontalAlignment="Left">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Canvas Width="16" Height="16" SnapsToDevicePixels="False">
-                                <Path Width="6.68219" Height="7.33332" Canvas.Left="8" Canvas.Top="8" Stretch="Fill" Fill="#FF0069C9" Data="F1 M 8,15.3333C 8.88179,15.3301 9.80008,14.9776 10.7024,14.2011C 13.1428,12.1011 14.2228,9.86967 14.6822,8L 8,8L 8,15.3333 Z "/>
-                                <Path Width="6.73484" Height="7.33334" Canvas.Left="1.26516" Canvas.Top="8" Stretch="Fill" Fill="#FFFEBD38" Data="F1 M 8,8L 1.26516,8C 1.70385,9.88499 2.8172,12.1566 5.51932,14.3718C 6.27495,14.9912 7.11928,15.3365 8,15.3333L 8,8 Z "/>
-                                <Path Width="7.00132" Height="7.33321" Canvas.Left="0.998675" Canvas.Top="0.66679" Stretch="Fill" Fill="#FF0069C9" Data="F1 M 1.79502,3.29241C 1.37462,3.33134 1.03701,3.32773 1.05754,3.87613C 1.08108,4.50488 0.810032,6.04438 1.26516,8L 8,8L 8,0.66679C 6.98049,0.689614 5.60185,1.8288 4.81968,2.25315C 3.88471,2.7604 2.45315,3.23145 1.79502,3.29241 Z "/>
-                                <Path Width="7.00005" Height="7.33321" Canvas.Left="8" Canvas.Top="0.66679" Stretch="Fill" Fill="#FFFEBD38" Data="F1 M 8,0.66679L 8,8L 14.6822,8C 15.1789,5.97836 14.95,4.37964 14.9307,3.82717C 14.9099,3.23262 14.7398,3.3629 14.2101,3.2839C 13.3576,3.15675 12.1321,2.7969 10.9358,2.09895C 10.2582,1.70367 9.00038,0.683145 8,0.66679 Z "/>
-                                <Path Width="15.0014" Height="15.6669" Canvas.Left="0.498689" Canvas.Top="0.166463" Stretch="Fill" StrokeLineJoin="Round" Stroke="#FF474747" Data="F1 M 8.05418,0.666665C 9.0004,0.683167 10.2583,1.70369 10.9358,2.09897C 12.1321,2.79693 13.3576,3.15677 14.2102,3.28392C 14.7398,3.36292 14.9099,3.23264 14.9307,3.82719C 14.9679,4.89061 15.7815,9.83035 10.7024,14.2011C 8.89891,15.7531 7.03151,15.6115 5.51933,14.3718C 0.0138423,9.85838 1.10378,5.11093 1.05755,3.87615C 1.03702,3.32775 1.37464,3.33137 1.79504,3.29243C 2.45316,3.23147 3.88473,2.76042 4.8197,2.25317C 5.61581,1.82125 7.02984,0.648801 8.05418,0.666665 Z "/>
-                            </Canvas>
+                    <Expander Header="ツール" Margin="0,20,0,0">
+                        <StackPanel Margin="10,0">
+                            <TextBlock Margin="0,10,0,0">WindowsインストールイメージからWindows REイメージ(WIMファイル)をコピーする</TextBlock>
+                            <Button x:Name="ExportWindowsReImageButton" HorizontalAlignment="Left">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Canvas Width="16" Height="16" SnapsToDevicePixels="False">
+                                        <Path Width="6.68219" Height="7.33332" Canvas.Left="8" Canvas.Top="8" Stretch="Fill" Fill="#FF0069C9" Data="F1 M 8,15.3333C 8.88179,15.3301 9.80008,14.9776 10.7024,14.2011C 13.1428,12.1011 14.2228,9.86967 14.6822,8L 8,8L 8,15.3333 Z "/>
+                                        <Path Width="6.73484" Height="7.33334" Canvas.Left="1.26516" Canvas.Top="8" Stretch="Fill" Fill="#FFFEBD38" Data="F1 M 8,8L 1.26516,8C 1.70385,9.88499 2.8172,12.1566 5.51932,14.3718C 6.27495,14.9912 7.11928,15.3365 8,15.3333L 8,8 Z "/>
+                                        <Path Width="7.00132" Height="7.33321" Canvas.Left="0.998675" Canvas.Top="0.66679" Stretch="Fill" Fill="#FF0069C9" Data="F1 M 1.79502,3.29241C 1.37462,3.33134 1.03701,3.32773 1.05754,3.87613C 1.08108,4.50488 0.810032,6.04438 1.26516,8L 8,8L 8,0.66679C 6.98049,0.689614 5.60185,1.8288 4.81968,2.25315C 3.88471,2.7604 2.45315,3.23145 1.79502,3.29241 Z "/>
+                                        <Path Width="7.00005" Height="7.33321" Canvas.Left="8" Canvas.Top="0.66679" Stretch="Fill" Fill="#FFFEBD38" Data="F1 M 8,0.66679L 8,8L 14.6822,8C 15.1789,5.97836 14.95,4.37964 14.9307,3.82717C 14.9099,3.23262 14.7398,3.3629 14.2101,3.2839C 13.3576,3.15675 12.1321,2.7969 10.9358,2.09895C 10.2582,1.70367 9.00038,0.683145 8,0.66679 Z "/>
+                                        <Path Width="15.0014" Height="15.6669" Canvas.Left="0.498689" Canvas.Top="0.166463" Stretch="Fill" StrokeLineJoin="Round" Stroke="#FF474747" Data="F1 M 8.05418,0.666665C 9.0004,0.683167 10.2583,1.70369 10.9358,2.09897C 12.1321,2.79693 13.3576,3.15677 14.2102,3.28392C 14.7398,3.36292 14.9099,3.23264 14.9307,3.82719C 14.9679,4.89061 15.7815,9.83035 10.7024,14.2011C 8.89891,15.7531 7.03151,15.6115 5.51933,14.3718C 0.0138423,9.85838 1.10378,5.11093 1.05755,3.87615C 1.03702,3.32775 1.37464,3.33137 1.79504,3.29243C 2.45316,3.23147 3.88473,2.76042 4.8197,2.25317C 5.61581,1.82125 7.02984,0.648801 8.05418,0.666665 Z "/>
+                                    </Canvas>
 
-                            <TextBlock Text="コピーする (作成中にキャンセルはできません)" Grid.Column="1" VerticalAlignment="Center"/>
-                        </Grid>
-                    </Button>
-                    <TextBlock Margin="0,10,0,0">カスタマイズするWIMファイル (オプション)</TextBlock>
-                    <Grid Width="400" HorizontalAlignment="Left">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBox x:Name="WimPathTextBox" IsReadOnly="True" Grid.Column="0"/>
-                        <Button x:Name="WimPathButton" Content="参照" Grid.Column="1"/>
-                    </Grid>
-                    <TextBlock Margin="0,10,0,0">コピーしたいファイル (オプション)</TextBlock>
-                    <Grid Width="400" HorizontalAlignment="Left">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBox x:Name="Option1PathTextBox" IsReadOnly="True" Grid.Column="0"/>
-                        <Button x:Name="Option1PathButton" Content="参照" Grid.Column="1"/>
-                    </Grid>
-                    <TextBlock Margin="0,10,0,0">コピーしたいファイル (オプション)</TextBlock>
-                    <Grid Width="400" HorizontalAlignment="Left">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBox x:Name="Option2PathTextBox" IsReadOnly="True" Grid.Column="0"/>
-                        <Button x:Name="Option2PathButton" Content="参照" Grid.Column="1"/>
-                    </Grid>
+                                    <TextBlock Text="コピーする (作成中にキャンセルはできません)" Grid.Column="1" VerticalAlignment="Center"/>
+                                </Grid>
+                            </Button>
+                            <TextBlock Margin="0,10,0,0">カスタマイズするWIMファイル</TextBlock>
+                            <Grid Width="400" HorizontalAlignment="Left">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="WimPathTextBox" IsReadOnly="True" Grid.Column="0"/>
+                                <Button x:Name="WimPathButton" Content="参照" Grid.Column="1"/>
+                            </Grid>
+                            <TextBlock Margin="0,10,0,0">コピーしたいファイル</TextBlock>
+                            <Grid Width="400" HorizontalAlignment="Left">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="Option1PathTextBox" IsReadOnly="True" Grid.Column="0"/>
+                                <Button x:Name="Option1PathButton" Content="参照" Grid.Column="1"/>
+                            </Grid>
+                            <TextBlock Margin="0,10,0,0">コピーしたいファイル</TextBlock>
+                            <Grid Width="400" HorizontalAlignment="Left">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="Option2PathTextBox" IsReadOnly="True" Grid.Column="0"/>
+                                <Button x:Name="Option2PathButton" Content="参照" Grid.Column="1"/>
+                            </Grid>
+                        </StackPanel>
+                    </Expander>
                 </StackPanel>
             </TabItem>
             <!--<TabItem Tag="ツール" Style="{DynamicResource TabItemStyle}">
@@ -301,6 +305,7 @@
                     <TextBlock Margin="0,10,0,0" FontSize="22">Windows PEにパッケージを追加する</TextBlock>
                     <ListBox>
                         <CheckBox x:Name="SupportJapaneseLanguageCheckBox" IsChecked="True">日本語表示のサポート</CheckBox>
+                        <CheckBox x:Name="SupportAddJapaneseLanguagePackCheckBox" IsChecked="False">日本語言語パックのインストール</CheckBox>
                         <!--<CheckBox x:Name="SupportJapaneseImeCheckBox">日本語入力のサポート</CheckBox>-->
                         <CheckBox x:Name="SupportPsCheckBox">PowerShellのサポート</CheckBox>
                         <CheckBox x:Name="SupportWmiCheckBox" Margin="20,0,0,0" IsEnabled="False" IsChecked="{Binding IsChecked, ElementName=SupportWmiCheckBox}">WinPE-WMI</CheckBox>

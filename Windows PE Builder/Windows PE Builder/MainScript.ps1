@@ -3,7 +3,7 @@
 #
 
 $script:ApplicationTitle = "Windows PE環境の構築"
-$script:LastUpdated = "2016/4/14"
+$script:LastUpdated = "2016/4/15"
 $script:Author = "morokoshidog"
 
 Add-Type -AssemblyName PresentationFramework
@@ -16,7 +16,7 @@ $script:BasedDirectory = Split-Path $MyInvocation.MyCommand.Path -Parent
 $script:ProjectDirectoryPath = ""
 
 # オプション2のファイルがあるフォルダー
-$Global:Option2Path = "%BasedDirectory%\Assets\%PlatformId%"
+$Global:Option2Path = "%BasedDirectory%\Base\%PlatformId%"
 
 # スクリプトの読み込み
 Get-ChildItem (join-path $BasedDirectory "Scripts") -Include "*.ps1" -Recurse | ForEach {& $_.FullName}
