@@ -62,6 +62,9 @@
     <Content Include="Assets\NavigationTabResource.xaml" />
     <Content Include="Assets\StyleResource.xaml" />
     <Content Include="Assets\ThemeResource.xaml" />
+    <Content Include="Base\BuildPe.txt" />
+    <Content Include="Base\BuildPe_RequestCancel.txt" />
+    <Content Include="Base\ExportReFromWim.txt" />
     <Content Include="Base\x64\sources\recovery\tools\WinREConfig.xml" />
     <Content Include="Base\x86\sources\recovery\tools\WinREConfig.xml" />
     <Content Include="View\MainWindow.xaml" />
