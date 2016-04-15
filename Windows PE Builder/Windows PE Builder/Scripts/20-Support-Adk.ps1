@@ -5,9 +5,9 @@
 # スクリプトがあるフォルダー
 $script:ProjectDirectoryPath = ""
 $Global:BuildedWindowsPePath = "WindowsPE-%PlatformId%.iso"
-$Global:BaseBatchPath = "Base\Base_BuildPe.txt"
-$Global:CancelBatchPath = "Base\Base_BuildPe_RequestCancel.txt"
-$Global:BaseExportReFromWimPath = "Base\Base_ExportReFromWim.txt"
+$Global:BaseBatchPath = "Base\BuildPe.txt"
+$Global:CancelBatchPath = "Base\BuildPe_RequestCancel.txt"
+$Global:BaseExportReFromWimPath = "Base\ExportReFromWim.txt"
 
 # Build-Peコマンドのパス
 $Global:BuildPeBatPath = "Build-Pe.bat"
