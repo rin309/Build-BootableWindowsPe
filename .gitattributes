@@ -1,4 +1,9 @@
 *.txt       eol=crlf
+*.bat       eol=crlf
+*.cmd       eol=crlf
+*.ps1       eol=crlf
+*.xaml       eol=crlf
+
 ###############################################################################
 # Set default behavior to automatically normalize line endings.
 ###############################################################################
