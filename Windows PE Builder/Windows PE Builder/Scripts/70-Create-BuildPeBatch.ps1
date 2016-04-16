@@ -157,7 +157,7 @@ Function global:Begin-CreateBuildPeBatch
 #[Action[string]] {
 		$Global:CopyWimFilePath = $MainWindow.FindName("WimPathTextBox").Text
 		Create-BuildPeBatch
-		start-process "cmd" -argumentlist ("/c","""",$LastBuildPeBatPath,"""") -verb runas -wait
+		start-process "cmd" -argumentlist ("/c","""$LastBuildPeBatPath""") -verb runas -wait
 
 		if ((Test-Path -Path $BuildedWindowsPePath) -eq $true)
 		{
@@ -165,7 +165,7 @@ Function global:Begin-CreateBuildPeBatch
 		}
 		else
 		{
-			start-process "cmd" -argumentlist ("/c","""",$LastCleanUpPeBatPath,"""") -verb runas -wait
+			start-process "cmd" -argumentlist ("/c","""$LastCleanUpPeBatPath""") -verb runas -wait
 		}
 
     #})
@@ -216,7 +216,7 @@ Function global:Begin-CopyWindowsReBatch
 		}
 
 		Create-CopyWindowsReBatch
-		start-process "cmd" -argumentlist ("/c","""",$LastBuildPeBatPath,"""") -verb runas -wait
+		start-process "cmd" -argumentlist ("/c","""$LastBuildPeBatPath""") -verb runas -wait
 
 		if ((Test-Path -Path $LastBuildPeBatPath) -eq $true)
 		{
