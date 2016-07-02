@@ -3,7 +3,7 @@
 #
 
 $script:ApplicationTitle = "Windows PE環境の構築"
-$script:LastUpdated = "2016/7/2"
+$script:LastUpdated = "20160702"
 $script:Author = "morokoshidog"
 
 Add-Type -AssemblyName PresentationFramework
