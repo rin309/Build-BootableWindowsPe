@@ -294,8 +294,8 @@ Function global:Load-Xaml()
 	$MainWindow.FindName("SupportWindowsReCheckBox").Add_UnChecked({Check-WindowsPeFeature $MainWindow.FindName("SupportWindowsReCheckBox").IsChecked $MainWindow.FindName("SupportPsCheckBox").IsChecked })#>
 	
 	#PowerShell
-	$MainWindow.FindName("SupportPsCheckBox").Add_Checked({Check-WindowsPeFeature $MainWindow.FindName("SupportWindowsReCheckBox").IsChecked $MainWindow.FindName("SupportPsCheckBox").IsChecked })
-	$MainWindow.FindName("SupportPsCheckBox").Add_UnChecked({Check-WindowsPeFeature $MainWindow.FindName("SupportWindowsReCheckBox").IsChecked $MainWindow.FindName("SupportPsCheckBox").IsChecked })
+	<#$MainWindow.FindName("SupportPsCheckBox").Add_Checked({Check-WindowsPeFeature $MainWindow.FindName("SupportWindowsReCheckBox").IsChecked $MainWindow.FindName("SupportPsCheckBox").IsChecked })
+	$MainWindow.FindName("SupportPsCheckBox").Add_UnChecked({Check-WindowsPeFeature $MainWindow.FindName("SupportWindowsReCheckBox").IsChecked $MainWindow.FindName("SupportPsCheckBox").IsChecked })#>
 
 
     $ProjectPathTextBox = $MainWindow.FindName("ProjectPathTextBox")

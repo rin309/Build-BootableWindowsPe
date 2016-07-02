@@ -306,7 +306,14 @@
                     <ListBox>
                         <CheckBox x:Name="SupportJapaneseLanguageCheckBox" IsChecked="True">日本語表示のサポート</CheckBox>
                         <CheckBox x:Name="SupportAddJapaneseLanguagePackCheckBox" IsChecked="False">日本語言語パックのインストール</CheckBox>
-                        <!--<CheckBox x:Name="SupportJapaneseImeCheckBox">日本語入力のサポート</CheckBox>-->
+                        <CheckBox x:Name="SupportPsCheckBox">PowerShellのサポート</CheckBox>
+                        <CheckBox x:Name="SupportWmiCheckBox" Margin="20,0,0,0" IsEnabled="False" IsChecked="{Binding IsChecked, ElementName=SupportPsCheckBox}">WinPE-WMI</CheckBox>
+                        <CheckBox x:Name="SupportNetFxCheckBox" Margin="20,0,0,0" IsEnabled="False" IsChecked="{Binding IsChecked, ElementName=SupportPsCheckBox}">.NET Framework 4.5のサポート</CheckBox>
+                        <CheckBox x:Name="SupportScriptingCheckBox" Margin="20,0,0,0" IsEnabled="False" IsChecked="{Binding IsChecked, ElementName=SupportPsCheckBox}">WinPE-Scripting</CheckBox>
+                        <CheckBox x:Name="SupportDismCmdletsCheckBox" Margin="20,0,0,0">WinPE-DismCmdlets</CheckBox>
+                        <CheckBox x:Name="SupportSecureBootCmdletsCheckBox" Margin="20,0,0,0">WinPE-SecureBootCmdlets</CheckBox>
+                        <CheckBox x:Name="SupportStorageWmiCheckBox2" Margin="20,0,0,0" IsEnabled="False" IsChecked="{Binding IsChecked, ElementName=SupportPsCheckBox}">WinPE-StorageWMI-Package (Windows 8.1 および Windows Server 2012 R2 の基本イメージに追加)</CheckBox>
+                        <!--<CheckBox x:Name="SupportJapaneseImeCheckBox">日本語入力のサポート</CheckBox>
                         <CheckBox x:Name="SupportPsCheckBox">PowerShellのサポート</CheckBox>
                         <CheckBox x:Name="SupportWmiCheckBox" Margin="20,0,0,0" IsEnabled="False" IsChecked="{Binding IsChecked, ElementName=SupportWmiCheckBox}">WinPE-WMI</CheckBox>
                         <CheckBox x:Name="SupportNetFxCheckBox" Margin="20,0,0,0" IsEnabled="False">.NET Framework 4.5のサポート</CheckBox>
@@ -314,7 +321,7 @@
                         <CheckBox x:Name="SupportDismCmdletsCheckBox" Margin="20,0,0,0">WinPE-DismCmdlets</CheckBox>
                         <CheckBox x:Name="SupportSecureBootCmdletsCheckBox" Margin="20,0,0,0">WinPE-SecureBootCmdlets</CheckBox>
                         <CheckBox x:Name="SupportStorageWmiCheckBox2" Margin="20,0,0,0" IsEnabled="False" IsChecked="{Binding IsChecked, ElementName=SupportStorageWmiCheckBox}">WinPE-StorageWMI-Package (Windows 8.1 および Windows Server 2012 R2 の基本イメージに追加)</CheckBox>
-                        <!--<CheckBox x:Name="SupportWindowsReCheckBox">回復環境 (Windows RE) と同等にする</CheckBox>
+                        <CheckBox x:Name="SupportWindowsReCheckBox">回復環境 (Windows RE) と同等にする</CheckBox>
                         <CheckBox x:Name="SupportWmiCheckBox2" Margin="20,0,0,0" IsEnabled="False">WinPE-WMI</CheckBox>
                         <CheckBox x:Name="SupportWindowsFoundationPackageCheckBox" Margin="20,0,0,0" IsEnabled="False">Microsoft-Windows-Foundation-Package</CheckBox>
                         <CheckBox x:Name="SupportEsCheckBox" Margin="20,0,0,0" IsEnabled="False">WinPE-EnhancedStorage</CheckBox>
