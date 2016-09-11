@@ -3,6 +3,6 @@
 <Recovery>
    <RecoveryTools>
       <RelativeFilePath>..\..\..\ghost\ghost64.exe</RelativeFilePath>
-      <CommandLineParam>/ib /fdsp</CommandLineParam>
+      <CommandLineParam>/ib /fdsp /split=2048</CommandLineParam>
    </RecoveryTools>
 </Recovery>
