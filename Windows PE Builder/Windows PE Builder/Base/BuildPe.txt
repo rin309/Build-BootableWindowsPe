@@ -82,7 +82,7 @@ Dism /mount-image /imagefile:"%PeDirectory%\media\sources\boot.wim" /index:1 /mo
 @rem *** PXEブートに対応する
 Bcdedit /store "%PeDirectory%\media\Boot\BCD" /deletevalue {default} bootmenupolicy
 copy "%PeDirectory%\mount\Windows\Boot\PXE\bootmgr.exe" "%PeDirectory%\media\Boot\bootmgr.exe"
-copy "%PeDirectory%\mount\Windows\Boot\PXE\pxeboot.n12" "%PeDirectory\media\Boot\pxeboot.n12"
+copy "%PeDirectory%\mount\Windows\Boot\PXE\pxeboot.n12" "%PeDirectory%\media\Boot\pxeboot.n12"
 
 @rem 追加のカスタマイズを行う場合はここにコードを記載する
 @rem pause
