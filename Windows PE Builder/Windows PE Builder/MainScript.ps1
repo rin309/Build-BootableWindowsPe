@@ -15,7 +15,7 @@ Add-Type -AssemblyName System.Windows.Forms
 $Script:BasedDirectory = Split-Path $MyInvocation.MyCommand.Path -Parent
 #
 # プロジェクトフォルダーの初期値
-$Global:ProjectDirectoryPath = "D:\Ghost"
+$Global:ProjectDirectoryPath = ""
 #
 # ドライバーがあるフォルダー
 $Global:DriverDirectoryPath = "%ProjectDirectory%\Drivers\%PlatformId%"
@@ -24,7 +24,7 @@ $Global:DriverDirectoryPath = "%ProjectDirectory%\Drivers\%PlatformId%"
 $Global:Option2Path = "%ProjectDirectory%\Base\%PlatformId%"
 #
 # ライセンス許諾状況
-$Script:LicenseAgreement = $true
+$Script:LicenseAgreement = $False
 #
 ######################
 
