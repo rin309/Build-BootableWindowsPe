@@ -28,45 +28,49 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
-    <Folder Include="Base\" />
-    <Folder Include="Base\x64\" />
-    <Folder Include="Base\x64\sources\" />
-    <Folder Include="Base\x64\sources\recovery\" />
-    <Folder Include="Base\x64\sources\recovery\tools\" />
-    <Folder Include="Base\x64\Windows\" />
-    <Folder Include="Base\x64\Windows\System32\" />
-    <Folder Include="Base\x86\" />
-    <Folder Include="Base\x86\sources\" />
-    <Folder Include="Base\x86\sources\recovery\" />
-    <Folder Include="Base\x86\sources\recovery\tools\" />
-    <Folder Include="Base\x86\Windows\" />
-    <Folder Include="Base\x86\Windows\System32\" />
+    <Folder Include="Templates\" />
     <Folder Include="Scripts\" />
+    <Folder Include="Templates\Base\" />
+    <Folder Include="Templates\Base\x64\" />
+    <Folder Include="Templates\Base\x64\sources\" />
+    <Folder Include="Templates\Base\x64\sources\recovery\" />
+    <Folder Include="Templates\Base\x64\sources\recovery\tools\" />
+    <Folder Include="Templates\Base\x64\Windows\" />
+    <Folder Include="Templates\Base\x64\Windows\System32\" />
+    <Folder Include="Templates\Base\x86\" />
+    <Folder Include="Templates\Base\x86\sources\" />
+    <Folder Include="Templates\Base\x86\sources\recovery\" />
+    <Folder Include="Templates\Base\x86\sources\recovery\tools\" />
+    <Folder Include="Templates\Base\x86\Windows\" />
+    <Folder Include="Templates\Base\x86\Windows\System32\" />
+    <Folder Include="Templates\Drivers\" />
+    <Folder Include="Templates\Drivers\x86\" />
+    <Folder Include="Templates\Drivers\x64\" />
     <Folder Include="View\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\x64\Windows\System32\startnet.cmd" />
-    <Compile Include="Base\x86\Windows\System32\startnet.cmd" />
+    <Compile Include="Templates\Base\x64\Windows\System32\startnet.cmd" />
+    <Compile Include="Templates\Base\x86\Windows\System32\startnet.cmd" />
     <Compile Include="MainScript.ps1" />
-    <Compile Include="Scripts\10-Elevation-ThisScript.ps1" />
-    <Compile Include="Scripts\20-Support-Adk.ps1" />
-    <Compile Include="Scripts\30-Extis-Path.ps1" />
-    <Compile Include="Scripts\40-Save-File.ps1" />
-    <Compile Include="Scripts\50-Select-Folder.ps1" />
-    <Compile Include="Scripts\60-Write-Command.ps1" />
-    <Compile Include="Scripts\70-Create-BuildPeBatch.ps1" />
-    <Compile Include="Scripts\80-Load-Xaml.ps1" />
+    <Compile Include="Scripts\1-1-Elevation-ThisScript.ps1" />
+    <Compile Include="Scripts\2-1-Support-Adk.ps1" />
+    <Compile Include="Scripts\3-1-Extis-Path.ps1" />
+    <Compile Include="Scripts\3-2-Save-File.ps1" />
+    <Compile Include="Scripts\3-3-Select-Folder.ps1" />
+    <Compile Include="Scripts\4-1-Write-Command.ps1" />
+    <Compile Include="Scripts\4-2-Create-BuildPeBatch.ps1" />
+    <Compile Include="Scripts\5-1-Load-Xaml.ps1" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\IndeterminateResource.xaml" />
     <Content Include="Assets\NavigationTabResource.xaml" />
     <Content Include="Assets\StyleResource.xaml" />
     <Content Include="Assets\ThemeResource.xaml" />
-    <Content Include="Base\BuildPe.txt" />
-    <Content Include="Base\BuildPe_RequestCancel.txt" />
-    <Content Include="Base\ExportReFromWim.txt" />
-    <Content Include="Base\x64\sources\recovery\tools\WinREConfig.xml" />
-    <Content Include="Base\x86\sources\recovery\tools\WinREConfig.xml" />
+    <Content Include="Templates\Base\BuildPe.txt" />
+    <Content Include="Templates\Base\BuildPe-RequestCancel.txt" />
+    <Content Include="Templates\Base\ExportReFromWim.txt" />
+    <Content Include="Templates\Base\x64\sources\recovery\tools\WinREConfig.xml" />
+    <Content Include="Templates\Base\x86\sources\recovery\tools\WinREConfig.xml" />
     <Content Include="View\MainWindow.xaml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

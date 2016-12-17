@@ -2,16 +2,16 @@
 # Create_BuildPeBatch.ps1
 #
 
-Function global:Replace-BuilderEnvironment($Base)
+Function Global:Replace-BuilderEnvironment($Base)
 {
     # 選択したプラットフォームを確認
-    $Global:ProjectDirectoryPath = $MainWindow.FindName("ProjectPathTextBox").Text
-    if ($MainWindow.FindName("SelectPlatformComboBox").SelectedItem -eq $MainWindow.FindName("Pe64ComboBoxItem"))
+    $Script:ProjectDirectoryPath = $MainWindow.FindName("ProjectPathTextBox").Text
+    If ($MainWindow.FindName("SelectPlatformComboBox").SelectedItem -eq $MainWindow.FindName("Pe64ComboBoxItem"))
     {
         $PlatformId = "x64"
         $MsPlatformId = "amd64"
     }
-    else
+    Else
     {
         $PlatformId = "x86"
         $MsPlatformId = "x86"
@@ -24,11 +24,15 @@ Function global:Replace-BuilderEnvironment($Base)
     $Path = Check-Path-ForWriteCommand($MainWindow.FindName("Option2PathTextBox").Text)
     $Option2 = $Path[0]
     $Option2Path = $Path[1]
+	
+    $Path = Check-Path-ForWriteCommand($MainWindow.FindName("DriversPathTextBox").Text)
+	$DriversInstall = $Path[0]
+	$DriverDirectoryPath = $Path[1]
     
-    $Global:BuildedWindowsPePath = $MainWindow.FindName("SavePathTextBox").Text
-    $Global:BuildedWindowsPePath = $BuildedWindowsPePath.Replace("%PlatformId%",$PlatformId)
+    $BuildedWindowsPePath = $MainWindow.FindName("SavePathTextBox").Text
+    $BuildedWindowsPePath = $BuildedWindowsPePath.Replace("%PlatformId%",$PlatformId)
 
-	$Global:WinAdkPath = $MainWindow.FindName("WindowsAdkPathTextBox").Text
+	$Script:WinAdkPath = $MainWindow.FindName("WindowsAdkPathTextBox").Text
 
     # ADK関連のパス を選択肢の通りに直す
     $DeploymentToolsPath = Join-Path $WinAdkPath $DeploymentToolsPath
@@ -41,14 +45,22 @@ Function global:Replace-BuilderEnvironment($Base)
     $CopyPePath = Join-Path $WinPePath $CopyPePath
     $MakeWinPEMediaPath = Join-Path $WinPePath $MakeWinPEMediaPath
 
-    $BaseBatchPath = Join-Path $BasedDirectory $BaseBatchPath
-    $OptionPath = Join-Path $BasedDirectory $PlatformId
+    $Script:BatchPath = Join-Path $Script:ProjectDirectoryPath $BaseBatchPath
+    $OptionPath = Join-Path $Script:ProjectDirectoryPath $PlatformId
     # 作業フォルダーに展開するPEのパス
-    $PeDirectory = Join-Path $Global:ProjectDirectoryPath "bin\"
-    $PeDirectory = Join-Path $Global:ProjectDirectoryPath $PlatformId
+    $PeDirectory = Join-Path $Script:ProjectDirectoryPath "bin\"
+    $PeDirectory = Join-Path $Script:ProjectDirectoryPath $PlatformId
     
     # 置換
-    $Base = $Base.Replace("%ProjectDirectory%", $Global:ProjectDirectoryPath)
+    $Base = $Base.Replace("%Support-Option1%", $Option1)
+    $Base = $Base.Replace("%Support-Option1%", $Option1)
+    $Base = $Base.Replace("%Option1Path%", $Option1Path)
+    $Base = $Base.Replace("%Support-Option2%", $Option2)
+    $Base = $Base.Replace("%Option2Path%", $Option2Path)
+    $Base = $Base.Replace("%Support-DriversInstall%", $DriversInstall)
+    $Base = $Base.Replace("%DriversDirectory%", $DriverDirectoryPath)
+
+    $Base = $Base.Replace("%ProjectDirectory%", $Script:ProjectDirectoryPath)
     $Base = $Base.Replace("%PlatformId%", $PlatformId)
     $Base = $Base.Replace("%MsPlatformId%", $MsPlatformId)
     $Base = $Base.Replace("%DeploymentToolsPath%", $DeploymentToolsPath)
@@ -58,21 +70,16 @@ Function global:Replace-BuilderEnvironment($Base)
     $Base = $Base.Replace("%EfisysNoPromptPath%", $EfisysNoPromptPath)
     $Base = $Base.Replace("%CopyPePath%", $CopyPePath)
     $Base = $Base.Replace("%MakeWinPEMediaPath%", $MakeWinPEMediaPath)
-    $Base = $Base.Replace("%BaseBatchPath%", $BaseBatchPath)
+    $Base = $Base.Replace("%BaseBatchPath%", $BatchPath)
     $Base = $Base.Replace("%OptionPath%", $OptionPath)
     $Base = $Base.Replace("%PeDirectory%", $PeDirectory)
     $Base = $Base.Replace("%BuildedWindowsPePath%", $BuildedWindowsPePath)
-    $Base = $Base.Replace("%Support-Option1%", $Option1)
-    $Base = $Base.Replace("%Support-Option1%", $Option1)
-    $Base = $Base.Replace("%Option1Path%", $Option1Path)
-    $Base = $Base.Replace("%Support-Option2%", $Option2)
-    $Base = $Base.Replace("%Option2Path%", $Option2Path)
 	
-    $Base = $Base.Replace("%Support-WindowsInstallEsd%", (Check-Boolean-ForWriteCommand($Global:WindowsInstallEsdPath.Length -ne 0)))
-	$Base = $Base.Replace("%WindowsInstallEsdPath%", $Global:WindowsInstallEsdPath)
-	$Base = $Base.Replace("%WindowsInstallWimPath%", $Global:WindowsInstallWimPath)
-    $Base = $Base.Replace("%Support-CopyWimFile%", (Check-Boolean-ForWriteCommand($Global:CopyWimFilePath.Length -ne 0)))
-    $Base = $Base.Replace("%CopyWimFilePath%", $Global:CopyWimFilePath)
+    $Base = $Base.Replace("%Support-WindowsInstallEsd%", (Check-Boolean-ForWriteCommand($Script:WindowsInstallEsdPath.Length -ne 0)))
+	$Base = $Base.Replace("%WindowsInstallEsdPath%", $Script:WindowsInstallEsdPath)
+	$Base = $Base.Replace("%WindowsInstallWimPath%", $Script:WindowsInstallWimPath)
+    $Base = $Base.Replace("%Support-CopyWimFile%", (Check-Boolean-ForWriteCommand($Script:CopyWimFilePath.Length -ne 0)))
+    $Base = $Base.Replace("%CopyWimFilePath%", $Script:CopyWimFilePath)
 	
 
     #オプション
@@ -131,39 +138,39 @@ Function global:Replace-BuilderEnvironment($Base)
 	
 	#$Base = $Base.Replace("%%", (Check-Boolean-ForWriteCommand($MainWindow.FindName("").IsChecked)))
 	
-	return $Base
+	Return $Base
 }
 
-Function global:Create-BuildPeBatch
+Function Global:Create-BuildPeBatch
 {
-	$Global:WindowsInstallEsdPath = ""
+	$Script:WindowsInstallEsdPath = ""
     # 読み込み
-    $BaseBatchPath = Join-Path $BasedDirectory $BaseBatchPath
-    $BaseBatch = Get-Content -Path $BaseBatchPath -Raw
+    $Script:BatchPath = Join-Path $Script:ProjectDirectoryPath $BaseBatchPath
+    $BaseBatch = Get-Content -Path $BatchPath -Raw
 	$BaseBatch = Replace-BuilderEnvironment $BaseBatch
-    $Global:LastBuildPeBatPath = Join-Path $Global:ProjectDirectoryPath $BuildPeBatPath 
-    Out-File -InputObject $BaseBatch -FilePath $Global:LastBuildPeBatPath -Encoding default
+    $Script:LastBuildPeBatPath = Join-Path $Script:ProjectDirectoryPath $BuildPeBatPath 
+    Out-File -InputObject $BaseBatch -FilePath $Script:LastBuildPeBatPath -Encoding default
 
-    $CancelBatchPath = Join-Path $BasedDirectory $CancelBatchPath
+    $Script:CancelBatchPath = Join-Path $Script:ProjectDirectoryPath $CancelBatchPath
     $CancelBaseBatch = Get-Content -Path $CancelBatchPath -Raw
 	$CancelBaseBatch = Replace-BuilderEnvironment $CancelBaseBatch
-    $Global:LastCleanUpPeBatPath = Join-Path $Global:ProjectDirectoryPath $CleanUpPeBatPath 
-    Out-File -InputObject $CancelBaseBatch -FilePath $Global:LastCleanUpPeBatPath -Encoding default
+    $Script:LastCleanUpPeBatPath = Join-Path $Script:ProjectDirectoryPath $CleanUpPeBatPath 
+    Out-File -InputObject $CancelBaseBatch -FilePath $Script:LastCleanUpPeBatPath -Encoding default
 }
 
-Function global:Begin-CreateBuildPeBatch
+Function Global:Begin-CreateBuildPeBatch
 {
-#$Global:MainWindow.Dispather.BeginInvoke(
+#$Script:MainWindow.Dispather.BeginInvoke(
 #[Action[string]] {
-		$Global:CopyWimFilePath = $MainWindow.FindName("WimPathTextBox").Text
+		$Script:CopyWimFilePath = $MainWindow.FindName("WimPathTextBox").Text
 		Create-BuildPeBatch
 		start-process "cmd" -argumentlist ("/c","""$LastBuildPeBatPath""") -verb runas -wait
 
-		if ((Test-Path -Path $BuildedWindowsPePath) -eq $true)
+		If ((Test-Path -Path $BuildedWindowsPePath) -eq $True)
 		{
 			#start-process "explorer" -argumentlist ("/n,/select,""{0}""" -f $BuildedWindowsPePath)
 		}
-		else
+		Else
 		{
 			start-process "cmd" -argumentlist ("/c","""$LastCleanUpPeBatPath""") -verb runas -wait
 		}
@@ -177,17 +184,17 @@ Function global:Begin-CreateBuildPeBatch
 	$MainWindow.FindName("IndicatorRoot").Visibility = [System.Windows.Visibility]::Collapsed
 }
 
-Function global:Create-CopyWindowsReBatch
+Function Global:Create-CopyWindowsReBatch
 {
     # 読み込み
-    $BaseBatchPath = Join-Path $BasedDirectory $BaseExportReFromWimPath
-    $BaseBatch = Get-Content -Path $BaseBatchPath -Raw
+    $BatchPath = Join-Path $Script:ProjectDirectoryPath $BaseExportReFromWimPath
+    $BaseBatch = Get-Content -Path $BatchPath -Raw
 	$BaseBatch = Replace-BuilderEnvironment $BaseBatch
-    $Global:LastBuildPeBatPath = Join-Path $Global:ProjectDirectoryPath $ExportReBatPath 
-    Out-File -InputObject $BaseBatch -FilePath $Global:LastBuildPeBatPath -Encoding default
+    $Script:LastBuildPeBatPath = Join-Path $Script:ProjectDirectoryPath $ExportReBatPath 
+    Out-File -InputObject $BaseBatch -FilePath $Script:LastBuildPeBatPath -Encoding default
 }
 
-Function global:Begin-CopyWindowsReBatch
+Function Global:Begin-CopyWindowsReBatch
 {
     $OpenFileDialog = New-Object System.Windows.Forms.OpenFileDialog
     $OpenFileDialog.Filter = "Windowsインストールイメージ|install.wim;install.esd"
@@ -198,29 +205,29 @@ Function global:Begin-CopyWindowsReBatch
 
     $SaveFileDialog = New-Object System.Windows.Forms.SaveFileDialog
     $SaveFileDialog.FileName = "Original-Winre.wim"
-    if ($MainWindow.FindName("ProjectPathTextBox").Text -ne $null) {
+    If ($MainWindow.FindName("ProjectPathTextBox").Text -ne $null) {
         $SaveFileDialog.InitialDirectory = $MainWindow.FindName("ProjectPathTextBox").Text
     }
     $SaveFileDialog.Filter = "WIMファイル (*.wim)|*.wim"
     if($SaveFileDialog.ShowDialog() -eq "OK")
     {
-		$Global:CopyWimFilePath = $SaveFileDialog.FileName
+		$Script:CopyWimFilePath = $SaveFileDialog.FileName
 
-		if ($(Get-ChildItem $OpenFileDialog.FileName).get_Extension().ToLower() -eq ".esd"){
-			$Global:WindowsInstallEsdPath = $OpenFileDialog.FileName
-			$Global:WindowsInstallWimPath = $Global:CopyWimFilePath,"-Source.wim"
+		If ($(Get-ChildItem $OpenFileDialog.FileName).get_Extension().ToLower() -eq ".esd"){
+			$Script:WindowsInstallEsdPath = $OpenFileDialog.FileName
+			$Script:WindowsInstallWimPath = $Script:CopyWimFilePath,"-Source.wim"
 		}
-		else{
-			$Global:WindowsInstallEsdPath = ""
-			$Global:WindowsInstallWimPath = $OpenFileDialog.FileName
+		Else{
+			$Script:WindowsInstallEsdPath = ""
+			$Script:WindowsInstallWimPath = $OpenFileDialog.FileName
 		}
 
 		Create-CopyWindowsReBatch
 		start-process "cmd" -argumentlist ("/c","""$LastBuildPeBatPath""") -verb runas -wait
 
-		if ((Test-Path -Path $LastBuildPeBatPath) -eq $true)
+		If ((Test-Path -Path $LastBuildPeBatPath) -eq $True)
 		{
-			$MainWindow.FindName("WimPathTextBox").Text = $Global:CopyWimFilePath
+			$MainWindow.FindName("WimPathTextBox").Text = $Script:CopyWimFilePath
 		}
         
     }

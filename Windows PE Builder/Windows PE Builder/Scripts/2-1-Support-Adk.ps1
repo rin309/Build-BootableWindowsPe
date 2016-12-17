@@ -3,10 +3,9 @@
 #
 
 # スクリプトがあるフォルダー
-$script:ProjectDirectoryPath = ""
 $Global:BuildedWindowsPePath = "WindowsPE-%PlatformId%.iso"
 $Global:BaseBatchPath = "Base\BuildPe.txt"
-$Global:CancelBatchPath = "Base\BuildPe_RequestCancel.txt"
+$Global:CancelBatchPath = "Base\BuildPe-RequestCancel.txt"
 $Global:BaseExportReFromWimPath = "Base\ExportReFromWim.txt"
 
 # Build-Peコマンドのパス
@@ -26,19 +25,19 @@ $Global:MakeWinPEMediaPath = "MakeWinPEMedia.cmd"
 
 
 # Ghostのパス
-if ([Environment]::Is64BitProcess -eq $true)
+If ([Environment]::Is64BitProcess -eq $True)
 {
-    if ((Test-Path -Path HKLM:SOFTWARE\Wow6432Node\Symantec\Ghost) -eq $true)
+    If ((Test-Path -Path HKLM:SOFTWARE\Wow6432Node\Symantec\Ghost) -eq $True)
     {
-        $Global:GhostPath = $(Get-ItemProperty -Path HKLM:SOFTWARE\Wow6432Node\Symantec\Ghost).InstallDir
-        $Global:GhostPath = Join-Path $Global:GhostPath "bootwiz\OEM\GSS\winpe\%PlatformId%\Base"
+        $Script:GhostPath = $(Get-ItemProperty -Path HKLM:SOFTWARE\Wow6432Node\Symantec\Ghost).InstallDir
+        $Script:GhostPath = Join-Path $Script:GhostPath "bootwiz\OEM\GSS\winpe\%PlatformId%\Base"
     }
 }
-else
+Else
 {
-    if ((Test-Path -Path HKLM:SOFTWARE\Symantec\Ghost) -eq $true)
+    If ((Test-Path -Path HKLM:SOFTWARE\Symantec\Ghost) -eq $True)
     {
-        $Global:GhostPath = $(Get-ItemProperty -Path HKLM:SOFTWARE\Symantec\Ghost).InstallDir
-        $Global:GhostPath = Join-Path $Global:GhostPath "bootwiz\OEM\GSS\winpe\%PlatformId%\Base"
+        $Script:GhostPath = $(Get-ItemProperty -Path HKLM:SOFTWARE\Symantec\Ghost).InstallDir
+        $Script:GhostPath = Join-Path $Script:GhostPath "bootwiz\OEM\GSS\winpe\%PlatformId%\Base"
     }
 }

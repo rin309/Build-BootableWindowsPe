@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="AccentColor">#FF0078C7</Color>
+    <Color x:Key="BorderColor">#FF84ADF8</Color>
+    <Color x:Key="BackgroundColor">#FF001A42</Color>
+    <SolidColorBrush x:Key="AccentBrush" Color="#FF0078C7"/>
+    <SolidColorBrush x:Key="BorderBrush" Color="#FF84ADF8"/>
+    <SolidColorBrush x:Key="BackgroundBrush" Color="#FF001A42"/>
+    <Style BasedOn="{StaticResource {x:Type Hyperlink}}" TargetType="{x:Type Hyperlink}">
+        <Setter Property="Foreground" Value="#FF0078C7"/>
+    </Style>
+
+</ResourceDictionary>

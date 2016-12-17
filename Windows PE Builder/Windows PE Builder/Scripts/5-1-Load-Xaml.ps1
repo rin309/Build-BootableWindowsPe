@@ -2,15 +2,15 @@
 # Load_Xaml.ps1
 #
 
-Function global:Read-Xaml($Path)
+Function Global:Read-Xaml($Path)
 {
     $XamlPath = Join-Path $BasedDirectory $Path
     $Xaml = [System.IO.File]::ReadAllText($XamlPath, [System.Text.Encoding]::UTF8)
     $Xaml = $Xaml.Replace("%BasedDirectory%", $BasedDirectory)
-    return [System.Windows.Markup.XamlReader]::Parse($Xaml)
+    Return [System.Windows.Markup.XamlReader]::Parse($Xaml)
 }
 
-Function global:Check-SaveAvailable($MainWindow)
+Function Global:Check-SaveAvailable($MainWindow)
 {
     $WindowsAdkPathTextBox = $MainWindow.FindName("WindowsAdkPathTextBox")
     $SavePathTextBox = $MainWindow.FindName("SavePathTextBox")
@@ -18,22 +18,25 @@ Function global:Check-SaveAvailable($MainWindow)
     
     $ExportWindowsReImageButton = $MainWindow.FindName("ExportWindowsReImageButton")
     $SaveButton = $MainWindow.FindName("SaveButton")
-    if (($WindowsAdkPathTextBox.Text -ne "") -and ($SavePathTextBox.Text -ne "") -and ($ProjectPathTextBox.Text -ne ""))
+    $CreateProjectOkButton = $MainWindow.FindName("CreateProjectOkButton")
+    If (($WindowsAdkPathTextBox.Text -ne "") -and ($SavePathTextBox.Text -ne "") -and ($ProjectPathTextBox.Text -ne ""))
     {
-        $ExportWindowsReImageButton.IsEnabled = $true
-        $SaveButton.IsEnabled = $true
+        $ExportWindowsReImageButton.IsEnabled = $True
+        $SaveButton.IsEnabled = $True
+		$CreateProjectOkButton.IsEnabled = $True
     }
-    else
+    Else
     {
-        $ExportWindowsReImageButton.IsEnabled = $false
-        $SaveButton.IsEnabled = $false
+        $ExportWindowsReImageButton.IsEnabled = $False
+        $SaveButton.IsEnabled = $False
+		$CreateProjectOkButton.IsEnabled = $False
     }
 }
 
 
-Function global:Check-WindowsPeFeature($WindowsReIsEnabled, $PowershellIsEnabled)
+Function Global:Check-WindowsPeFeature($WindowsReIsEnabled, $PowershellIsEnabled)
 {
-	if (($WindowsReIsEnabled -eq $true) -and ($PowershellIsEnabled -eq $true))
+	If (($WindowsReIsEnabled -eq $True) -and ($PowershellIsEnabled -eq $True))
 	{
 		$MainWindow.FindName("SupportWmiCheckBox").IsChecked = $True
 		#$MainWindow.FindName("SupportWindowsFoundationPackageCheckBox").IsChecked = $True
@@ -51,7 +54,7 @@ Function global:Check-WindowsPeFeature($WindowsReIsEnabled, $PowershellIsEnabled
 		$MainWindow.FindName("SupportDismCmdletsCheckBox").IsChecked = $True
 		$MainWindow.FindName("SupportSecureBootCmdletsCheckBox").IsChecked = $True
 	}
-	elseif (($WindowsReIsEnabled -eq $true) -and ($PowershellIsEnabled -eq $false))
+	ElseIf (($WindowsReIsEnabled -eq $True) -and ($PowershellIsEnabled -eq $False))
 	{
 		$MainWindow.FindName("SupportWmiCheckBox").IsChecked = $True
 		#$MainWindow.FindName("SupportWindowsFoundationPackageCheckBox").IsChecked = $True
@@ -65,21 +68,21 @@ Function global:Check-WindowsPeFeature($WindowsReIsEnabled, $PowershellIsEnabled
 		$MainWindow.FindName("SupportStorageWmiCheckBox").IsChecked = $True
 		$MainWindow.FindName("SupportHtaCheckBox").IsChecked = $True
 
-		$MainWindow.FindName("SupportNetFxCheckBox").IsChecked = $false
-		$MainWindow.FindName("SupportDismCmdletsCheckBox").IsChecked = $false
-		$MainWindow.FindName("SupportSecureBootCmdletsCheckBox").IsChecked = $false
+		$MainWindow.FindName("SupportNetFxCheckBox").IsChecked = $False
+		$MainWindow.FindName("SupportDismCmdletsCheckBox").IsChecked = $False
+		$MainWindow.FindName("SupportSecureBootCmdletsCheckBox").IsChecked = $False
 	}
-	elseif (($WindowsReIsEnabled -eq $false) -and ($PowershellIsEnabled -eq $true))
+	ElseIf (($WindowsReIsEnabled -eq $False) -and ($PowershellIsEnabled -eq $True))
 	{
 		#$MainWindow.FindName("SupportWindowsFoundationPackageCheckBox").IsChecked = $True
-		$MainWindow.FindName("SupportEsCheckBox").IsChecked = $false
-		$MainWindow.FindName("SupportRejuvCheckBox").IsChecked = $false
-		$MainWindow.FindName("SupportSecureStartupCheckBox").IsChecked = $false
-		$MainWindow.FindName("SupportSetupCheckBox").IsChecked = $false
-		$MainWindow.FindName("SupportSrtCheckBox").IsChecked = $false
-		$MainWindow.FindName("SupportWdsCheckBox").IsChecked = $false
-		$MainWindow.FindName("SupportStorageWmiCheckBox").IsChecked = $true
-		$MainWindow.FindName("SupportHtaCheckBox").IsChecked = $false
+		$MainWindow.FindName("SupportEsCheckBox").IsChecked = $False
+		$MainWindow.FindName("SupportRejuvCheckBox").IsChecked = $False
+		$MainWindow.FindName("SupportSecureStartupCheckBox").IsChecked = $False
+		$MainWindow.FindName("SupportSetupCheckBox").IsChecked = $False
+		$MainWindow.FindName("SupportSrtCheckBox").IsChecked = $False
+		$MainWindow.FindName("SupportWdsCheckBox").IsChecked = $False
+		$MainWindow.FindName("SupportStorageWmiCheckBox").IsChecked = $True
+		$MainWindow.FindName("SupportHtaCheckBox").IsChecked = $False
 
 		$MainWindow.FindName("SupportWmiCheckBox").IsChecked = $True
 		$MainWindow.FindName("SupportNetFxCheckBox").IsChecked = $True
@@ -87,132 +90,132 @@ Function global:Check-WindowsPeFeature($WindowsReIsEnabled, $PowershellIsEnabled
 		$MainWindow.FindName("SupportDismCmdletsCheckBox").IsChecked = $True
 		$MainWindow.FindName("SupportSecureBootCmdletsCheckBox").IsChecked = $True
 	}
-	else
+	Else
 	{
-		$MainWindow.FindName("SupportWmiCheckBox").IsChecked = $false
-		#$MainWindow.FindName("SupportWindowsFoundationPackageCheckBox").IsChecked = $false
-		$MainWindow.FindName("SupportEsCheckBox").IsChecked = $false
-		$MainWindow.FindName("SupportRejuvCheckBox").IsChecked = $false
-		$MainWindow.FindName("SupportScriptingCheckBox").IsChecked = $false
-		$MainWindow.FindName("SupportSecureStartupCheckBox").IsChecked = $false
-		$MainWindow.FindName("SupportSetupCheckBox").IsChecked = $false
-		$MainWindow.FindName("SupportSrtCheckBox").IsChecked = $false
-		$MainWindow.FindName("SupportWdsCheckBox").IsChecked = $false
-		$MainWindow.FindName("SupportStorageWmiCheckBox").IsChecked = $false
-		$MainWindow.FindName("SupportHtaCheckBox").IsChecked = $false
+		$MainWindow.FindName("SupportWmiCheckBox").IsChecked = $False
+		#$MainWindow.FindName("SupportWindowsFoundationPackageCheckBox").IsChecked = $False
+		$MainWindow.FindName("SupportEsCheckBox").IsChecked = $False
+		$MainWindow.FindName("SupportRejuvCheckBox").IsChecked = $False
+		$MainWindow.FindName("SupportScriptingCheckBox").IsChecked = $False
+		$MainWindow.FindName("SupportSecureStartupCheckBox").IsChecked = $False
+		$MainWindow.FindName("SupportSetupCheckBox").IsChecked = $False
+		$MainWindow.FindName("SupportSrtCheckBox").IsChecked = $False
+		$MainWindow.FindName("SupportWdsCheckBox").IsChecked = $False
+		$MainWindow.FindName("SupportStorageWmiCheckBox").IsChecked = $False
+		$MainWindow.FindName("SupportHtaCheckBox").IsChecked = $False
 
-		$MainWindow.FindName("SupportNetFxCheckBox").IsChecked = $false
-		$MainWindow.FindName("SupportDismCmdletsCheckBox").IsChecked = $false
-		$MainWindow.FindName("SupportSecureBootCmdletsCheckBox").IsChecked = $false
+		$MainWindow.FindName("SupportNetFxCheckBox").IsChecked = $False
+		$MainWindow.FindName("SupportDismCmdletsCheckBox").IsChecked = $False
+		$MainWindow.FindName("SupportSecureBootCmdletsCheckBox").IsChecked = $False
 	}
 }
 
-Function global:Open-Browser($Uri)
+Function Global:Open-Browser($Uri)
 {
 	Start-Process $Uri
 
 }
 
-function global:InitializingAdkComBox()
+Function Global:InitializingAdkComBox()
 {
-	$IsAdkInstalledEnvironment = $false
-	$IsMultipleAdkEnvironment = $false
+	$IsAdkInstalledEnvironment = $False
+	$IsMultipleAdkEnvironment = $False
 
 	# 使用中のプラットフォームによる差異を確認
-	if ([Environment]::Is64BitProcess -eq $true)
+	If ([Environment]::Is64BitProcess -eq $True)
 	{
-		if ((Test-Path -Path HKLM:"SOFTWARE\Wow6432Node\Microsoft\Windows Kits\Installed Roots") -eq $true)
+		If ((Test-Path -Path HKLM:"SOFTWARE\Wow6432Node\Microsoft\Windows Kits\Installed Roots") -eq $True)
 		{
 			$KitsRoot = $(Get-ItemProperty -Path HKLM:"SOFTWARE\Wow6432Node\Microsoft\Windows Kits\Installed Roots").KitsRoot
-			if ($KitsRoot -ne $null)
+			If ($KitsRoot -ne $null)
 			{
 				$MainWindow.FindName("Adk8ComboBoxItem").Tag = $KitsRoot
-				$IsAdkInstalledEnvironment = $true
+				$IsAdkInstalledEnvironment = $True
 				$MainWindow.FindName("SelectAdkComboBox").SelectedItem = $MainWindow.FindName("Adk8ComboBoxItem")
 			}
-			else
+			Else
 			{
 				$MainWindow.FindName("Adk8ComboBoxItem").Visibility = [System.Windows.Visibility]::Collapsed
 			}
 			$KitsRoot = $(Get-ItemProperty -Path HKLM:"SOFTWARE\Wow6432Node\Microsoft\Windows Kits\Installed Roots").KitsRoot81
-			if ($KitsRoot -ne $null)
+			If ($KitsRoot -ne $null)
 			{
 				$MainWindow.FindName("Adk81ComboBoxItem").Tag = $KitsRoot
-				if ($IsAdkInstalledEnvironment -eq $true)
+				If ($IsAdkInstalledEnvironment -eq $True)
 				{
-					$IsMultipleAdkEnvironment = $true
+					$IsMultipleAdkEnvironment = $True
 				}
-				$IsAdkInstalledEnvironment = $true
+				$IsAdkInstalledEnvironment = $True
 				$MainWindow.FindName("SelectAdkComboBox").SelectedItem = $MainWindow.FindName("Adk81ComboBoxItem")
 			}
-			else
+			Else
 			{
 				$MainWindow.FindName("Adk81ComboBoxItem").Visibility = [System.Windows.Visibility]::Collapsed
 			}
 			$KitsRoot = $(Get-ItemProperty -Path HKLM:"SOFTWARE\Wow6432Node\Microsoft\Windows Kits\Installed Roots").KitsRoot10
-			if ($KitsRoot -ne $null)
+			If ($KitsRoot -ne $null)
 			{
 				$MainWindow.FindName("Adk10ComboBoxItem").Tag = $KitsRoot
-				if ($IsAdkInstalledEnvironment -eq $true)
+				If ($IsAdkInstalledEnvironment -eq $True)
 				{
-					$IsMultipleAdkEnvironment = $true
+					$IsMultipleAdkEnvironment = $True
 				}
 				$MainWindow.FindName("SelectAdkComboBox").SelectedItem = $MainWindow.FindName("Adk10ComboBoxItem")
 			}
-			else
+			Else
 			{
 				$MainWindow.FindName("Adk10ComboBoxItem").Visibility = [System.Windows.Visibility]::Collapsed
 			}
 		}
 	}
-	else
+	Else
 	{
-		if ((Test-Path -Path HKLM:"SOFTWARE\Microsoft\Windows Kits\Installed Roots") -eq $true)
+		If ((Test-Path -Path HKLM:"SOFTWARE\Microsoft\Windows Kits\Installed Roots") -eq $True)
 		{
 			$KitsRoot = $(Get-ItemProperty -Path HKLM:"SOFTWARE\Microsoft\Windows Kits\Installed Roots").KitsRoot
-			if ($KitsRoot -ne $null)
+			If ($KitsRoot -ne $null)
 			{
 				$MainWindow.FindName("Adk8ComboBoxItem").Tag = $KitsRoot
-				$IsAdkInstalledEnvironment = $true
+				$IsAdkInstalledEnvironment = $True
 				$MainWindow.FindName("SelectAdkComboBox").SelectedItem = $MainWindow.FindName("Adk8ComboBoxItem")
 			}
-			else
+			Else
 			{
 				$MainWindow.FindName("Adk8ComboBoxItem").Visibility = [System.Windows.Visibility]::Collapsed
 			}
 			$KitsRoot = $(Get-ItemProperty -Path HKLM:"SOFTWARE\Microsoft\Windows Kits\Installed Roots").KitsRoot81
-			if ($KitsRoot -ne $null)
+			If ($KitsRoot -ne $null)
 			{
 				$MainWindow.FindName("Adk81ComboBoxItem").Tag = $KitsRoot
-				if ($IsAdkInstalledEnvironment -eq $true)
+				If ($IsAdkInstalledEnvironment -eq $True)
 				{
-					$IsMultipleAdkEnvironment = $true
+					$IsMultipleAdkEnvironment = $True
 				}
-				$IsAdkInstalledEnvironment = $true
+				$IsAdkInstalledEnvironment = $True
 				$MainWindow.FindName("SelectAdkComboBox").SelectedItem = $MainWindow.FindName("Adk81ComboBoxItem")
 			}
-			else
+			Else
 			{
 				$MainWindow.FindName("Adk81ComboBoxItem").Visibility = [System.Windows.Visibility]::Collapsed
 			}
 			$KitsRoot = $(Get-ItemProperty -Path HKLM:"SOFTWARE\Microsoft\Windows Kits\Installed Roots").KitsRoot10
-			if ($KitsRoot -ne $null)
+			If ($KitsRoot -ne $null)
 			{
 				$MainWindow.FindName("Adk10ComboBoxItem").Tag = $KitsRoot
-				if ($IsAdkInstalledEnvironment -eq $true)
+				If ($IsAdkInstalledEnvironment -eq $True)
 				{
-					$IsMultipleAdkEnvironment = $true
+					$IsMultipleAdkEnvironment = $True
 				}
 				$MainWindow.FindName("SelectAdkComboBox").SelectedItem = $MainWindow.FindName("Adk10ComboBoxItem")
 			}
-			else
+			Else
 			{
 				$MainWindow.FindName("Adk10ComboBoxItem").Visibility = [System.Windows.Visibility]::Collapsed
 			}
 		}
 	}
 
-	if ($IsMultipleAdkEnvironment -eq $false)
+	If ($IsMultipleAdkEnvironment -eq $False)
 	{
 		$MainWindow.FindName("SelectAdkRoot").Visibility = [System.Windows.Visibility]::Collapsed
 	}
@@ -220,9 +223,9 @@ function global:InitializingAdkComBox()
 
 
 
-Function global:Load-Xaml()
+Function Global:Load-Xaml()
 {
-    $Global:MainWindow = Read-Xaml("View/MainWindow.xaml")
+    $Script:MainWindow = Read-Xaml("View/MainWindow.xaml")
 
     $WindowsAdkPathButton = $MainWindow.FindName("WindowsAdkPathButton")
     $WindowsAdkPathButton.Add_Click({
@@ -300,10 +303,11 @@ Function global:Load-Xaml()
 
     $ProjectPathTextBox = $MainWindow.FindName("ProjectPathTextBox")
     $ProjectPathTextBox.Add_TextChanged({
-        if ($ProjectPathTextBox.Text -ne "")
+        If ($ProjectPathTextBox.Text -ne "")
         {
+			$Script:ProjectDirectoryPath = $ProjectPathTextBox.Text
             $SavePathTextBox = $MainWindow.FindName("SavePathTextBox")
-            $SavePathTextBox.Text = Join-Path $ProjectPathTextBox.Text $BuildedWindowsPePath
+            $SavePathTextBox.Text = Join-Path $ProjectDirectoryPath $BuildedWindowsPePath
         }
         Check-SaveAvailable($MainWindow)
     })
@@ -327,10 +331,20 @@ Function global:Load-Xaml()
 		$MainWindow.FindName("CancelButton").Visibility = [System.Windows.Visibility]::Collapsed
     })
 	
+	$CreateProjectOkButton = $MainWindow.FindName("CreateProjectOkButton")
+    $CreateProjectOkButton.Add_Click({
+		$MainWindow.FindName("CreateProjectRoot").Visibility = [System.Windows.Visibility]::Collapsed
+		Copy-Item (Join-Path $BasedDirectory "Templates\*") $ProjectDirectoryPath -Recurse -Force
+    })
+
     $SaveButton = $MainWindow.FindName("AgreeButton")
     $SaveButton.Add_Click({
 		$MainWindow.FindName("EulaRoot").Visibility = [System.Windows.Visibility]::Collapsed
     })
+
+	If ($Script:LicenseAgreement){
+		$MainWindow.FindName("EulaRoot").Visibility = [System.Windows.Visibility]::Collapsed
+	}
 	
     $SaveButton = $MainWindow.FindName("ExitButton")
     $SaveButton.Add_Click({
@@ -343,9 +357,10 @@ Function global:Load-Xaml()
 		$MainWindow.FindName("WindowsAdkPathTextBox").Text = Extis-Path($MainWindow.FindName("SelectAdkComboBox").SelectedItem.Tag)
     })
 
-    $MainWindow.FindName("Option1PathTextBox").Text = $Global:GhostPath
-    $MainWindow.FindName("Option2PathTextBox").Text = $Global:Option2Path
-    $MainWindow.FindName("ProjectPathTextBox").Text = $Global:ProjectDirectoryPath
+    $MainWindow.FindName("DriversPathTextBox").Text = $Script:DriverDirectoryPath
+    $MainWindow.FindName("Option1PathTextBox").Text = $Script:GhostPath
+    $MainWindow.FindName("Option2PathTextBox").Text = $Script:Option2Path
+    $MainWindow.FindName("ProjectPathTextBox").Text = $Script:ProjectDirectoryPath
 
     Check-SaveAvailable($MainWindow)
 
@@ -356,5 +371,5 @@ Function global:Load-Xaml()
 
 	InitializingAdkComBox
 
-    return $MainWindow
+    Return $MainWindow
 }

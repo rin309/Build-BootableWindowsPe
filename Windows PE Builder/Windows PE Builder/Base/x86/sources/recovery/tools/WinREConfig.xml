@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<!-- WinREConfig.xml -->
-<Recovery>
-   <RecoveryTools>
-      <RelativeFilePath>..\..\..\ghost\ghost32.exe</RelativeFilePath>
-      <CommandLineParam>/split=2048</CommandLineParam>
-   </RecoveryTools>
-</Recovery>

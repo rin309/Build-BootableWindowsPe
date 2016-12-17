@@ -2,23 +2,23 @@
 # Select-Folder
 #
 
-Function global:Select-Folder($TextBox)
+Function Global:Select-Folder($TextBox)
 {
-	#if ([System.Environment]::OSVersion.Version.Major -ge 6)
+	#If ([System.Environment]::OSVersion.Version.Major -ge 6)
 	#{
 		
 	#}
-	#else
+	#Else
 	#{
 		$FolderBrowserDialog = New-Object System.Windows.Forms.FolderBrowserDialog
-		if ($TextBox.Text -ne $null) {
+		If ($TextBox.Text -ne $null) {
 			$FolderBrowserDialog.SelectedPath = $TextBox.Text
 		}
 		if($FolderBrowserDialog.ShowDialog() -eq "OK")
 		{
 			$TextBox.Text = $FolderBrowserDialog.SelectedPath
 		}
-		else
+		Else
 		{
 		}
 	#}

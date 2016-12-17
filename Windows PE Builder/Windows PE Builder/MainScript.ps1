@@ -2,32 +2,41 @@
 # Windows PE Builder
 #
 
-$script:ApplicationTitle = "Windows PE環境の構築"
-$script:LastUpdated = "20160702"
-$script:Author = "morokoshidog"
+$Script:ApplicationTitle = "Windows PE Builder"
+$Script:LastUpdated = "20161217"
+$Script:Author = "morokoshidog"
 
 Add-Type -AssemblyName PresentationFramework
 Add-Type -AssemblyName System.Windows.Forms
 
+### オプション設定 ###
+#
 # このスクリプトがあるフォルダー
-$script:BasedDirectory = Split-Path $MyInvocation.MyCommand.Path -Parent
-
+$Script:BasedDirectory = Split-Path $MyInvocation.MyCommand.Path -Parent
+#
 # プロジェクトフォルダーの初期値
-$script:ProjectDirectoryPath = ""
-
+$Global:ProjectDirectoryPath = "D:\Ghost"
+#
+# ドライバーがあるフォルダー
+$Global:DriverDirectoryPath = "%ProjectDirectory%\Drivers\%PlatformId%"
+#
 # オプション2のファイルがあるフォルダー
-$Global:Option2Path = "%BasedDirectory%\Base\%PlatformId%"
+$Global:Option2Path = "%ProjectDirectory%\Base\%PlatformId%"
+#
+# ライセンス許諾状況
+$Script:LicenseAgreement = $true
+#
+######################
+
 
 # スクリプトの読み込み
-Get-ChildItem (join-path $BasedDirectory "Scripts") -Include "*.ps1" -Recurse | ForEach {& $_.FullName}
-
-$script:MainWindow = Load-Xaml
-
-if ($MainWindow.ShowDialog() -eq $False)
+Get-ChildItem (Join-Path $BasedDirectory "Scripts") -Include "*.ps1" -Recurse | ForEach {& $_.FullName}
+$Script:MainWindow = Load-Xaml
+If ($MainWindow.ShowDialog() -eq $False)
 {
-	write-host "キャンセルされました"
+	Write-Host "キャンセルされました"
 }
-else
+Else
 {
 	Begin-CreateBuildPeBatch
 }

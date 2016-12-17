@@ -91,7 +91,7 @@ copy "%PeDirectory%\mount\Windows\Boot\PXE\pxeboot.n12" "%PeDirectory%\media\Boo
 @rem powershell -command "Get-WindowsOptionalFeature -Path """%PeDirectory%\mount""" | Select FeatureName"
 
 @rem ドライバーの追加
-@rem Dism /Add-Driver /Image:"%PeDirectory%\mount" /Driver:"C:\SampleDriver\driver.inf"
+%Support-DriversInstall%Dism /Add-Driver /Image:"%PeDirectory%\mount" /Driver:"%DriversDirectory%" /Recurse
 
 @rem 64ビット版Windows向けでPXEブート対応にするためにUEFIのみにする
 @rem bcdedit /store "%PeDirectory%\media\Boot\BCD" /set {Default} path \windows\system32\winload.efi
