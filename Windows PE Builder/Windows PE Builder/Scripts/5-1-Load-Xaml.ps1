@@ -357,10 +357,10 @@ Function Global:Load-Xaml()
 		$MainWindow.FindName("WindowsAdkPathTextBox").Text = Extis-Path($MainWindow.FindName("SelectAdkComboBox").SelectedItem.Tag)
     })
 
-    $MainWindow.FindName("DriversPathTextBox").Text = $Script:DriverDirectoryPath
-    $MainWindow.FindName("Option1PathTextBox").Text = $Script:GhostPath
-    $MainWindow.FindName("Option2PathTextBox").Text = $Script:Option2Path
-    $MainWindow.FindName("ProjectPathTextBox").Text = $Script:ProjectDirectoryPath
+    $MainWindow.FindName("DriversPathTextBox").Text = $DriverDirectoryPath
+    $MainWindow.FindName("Option1PathTextBox").Text = $GhostPath
+    $MainWindow.FindName("Option2PathTextBox").Text = $Option2Path
+    $MainWindow.FindName("ProjectPathTextBox").Text = $ProjectDirectoryPath
 
     Check-SaveAvailable($MainWindow)
 

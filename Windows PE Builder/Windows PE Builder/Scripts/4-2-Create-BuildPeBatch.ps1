@@ -45,11 +45,11 @@ Function Global:Replace-BuilderEnvironment($Base)
     $CopyPePath = Join-Path $WinPePath $CopyPePath
     $MakeWinPEMediaPath = Join-Path $WinPePath $MakeWinPEMediaPath
 
-    $Script:BatchPath = Join-Path $Script:ProjectDirectoryPath $BaseBatchPath
-    $OptionPath = Join-Path $Script:ProjectDirectoryPath $PlatformId
+    $Script:BatchPath = Join-Path $ProjectDirectoryPath $BaseBatchPath
+    $OptionPath = Join-Path $ProjectDirectoryPath $PlatformId
     # 作業フォルダーに展開するPEのパス
-    $PeDirectory = Join-Path $Script:ProjectDirectoryPath "bin\"
-    $PeDirectory = Join-Path $Script:ProjectDirectoryPath $PlatformId
+    $PeDirectory = Join-Path $ProjectDirectoryPath "bin\"
+    $PeDirectory = Join-Path $ProjectDirectoryPath $PlatformId
     
     # 置換
     $Base = $Base.Replace("%Support-Option1%", $Option1)
@@ -60,7 +60,7 @@ Function Global:Replace-BuilderEnvironment($Base)
     $Base = $Base.Replace("%Support-DriversInstall%", $DriversInstall)
     $Base = $Base.Replace("%DriversDirectory%", $DriverDirectoryPath)
 
-    $Base = $Base.Replace("%ProjectDirectory%", $Script:ProjectDirectoryPath)
+    $Base = $Base.Replace("%ProjectDirectory%", $ProjectDirectoryPath)
     $Base = $Base.Replace("%PlatformId%", $PlatformId)
     $Base = $Base.Replace("%MsPlatformId%", $MsPlatformId)
     $Base = $Base.Replace("%DeploymentToolsPath%", $DeploymentToolsPath)
@@ -75,11 +75,11 @@ Function Global:Replace-BuilderEnvironment($Base)
     $Base = $Base.Replace("%PeDirectory%", $PeDirectory)
     $Base = $Base.Replace("%BuildedWindowsPePath%", $BuildedWindowsPePath)
 	
-    $Base = $Base.Replace("%Support-WindowsInstallEsd%", (Check-Boolean-ForWriteCommand($Script:WindowsInstallEsdPath.Length -ne 0)))
-	$Base = $Base.Replace("%WindowsInstallEsdPath%", $Script:WindowsInstallEsdPath)
-	$Base = $Base.Replace("%WindowsInstallWimPath%", $Script:WindowsInstallWimPath)
-    $Base = $Base.Replace("%Support-CopyWimFile%", (Check-Boolean-ForWriteCommand($Script:CopyWimFilePath.Length -ne 0)))
-    $Base = $Base.Replace("%CopyWimFilePath%", $Script:CopyWimFilePath)
+    $Base = $Base.Replace("%Support-WindowsInstallEsd%", (Check-Boolean-ForWriteCommand($WindowsInstallEsdPath.Length -ne 0)))
+	$Base = $Base.Replace("%WindowsInstallEsdPath%", $WindowsInstallEsdPath)
+	$Base = $Base.Replace("%WindowsInstallWimPath%", $WindowsInstallWimPath)
+    $Base = $Base.Replace("%Support-CopyWimFile%", (Check-Boolean-ForWriteCommand($CopyWimFilePath.Length -ne 0)))
+    $Base = $Base.Replace("%CopyWimFilePath%", $CopyWimFilePath)
 	
 
     #オプション
@@ -145,17 +145,17 @@ Function Global:Create-BuildPeBatch
 {
 	$Script:WindowsInstallEsdPath = ""
     # 読み込み
-    $Script:BatchPath = Join-Path $Script:ProjectDirectoryPath $BaseBatchPath
+    $Script:BatchPath = Join-Path $ProjectDirectoryPath $BaseBatchPath
     $BaseBatch = Get-Content -Path $BatchPath -Raw
 	$BaseBatch = Replace-BuilderEnvironment $BaseBatch
-    $Script:LastBuildPeBatPath = Join-Path $Script:ProjectDirectoryPath $BuildPeBatPath 
-    Out-File -InputObject $BaseBatch -FilePath $Script:LastBuildPeBatPath -Encoding default
+    $Script:LastBuildPeBatPath = Join-Path $ProjectDirectoryPath $BuildPeBatPath 
+    Out-File -InputObject $BaseBatch -FilePath $LastBuildPeBatPath -Encoding default
 
-    $Script:CancelBatchPath = Join-Path $Script:ProjectDirectoryPath $CancelBatchPath
+    $Script:CancelBatchPath = Join-Path $ProjectDirectoryPath $CancelBatchPath
     $CancelBaseBatch = Get-Content -Path $CancelBatchPath -Raw
 	$CancelBaseBatch = Replace-BuilderEnvironment $CancelBaseBatch
-    $Script:LastCleanUpPeBatPath = Join-Path $Script:ProjectDirectoryPath $CleanUpPeBatPath 
-    Out-File -InputObject $CancelBaseBatch -FilePath $Script:LastCleanUpPeBatPath -Encoding default
+    $Script:LastCleanUpPeBatPath = Join-Path $ProjectDirectoryPath $CleanUpPeBatPath 
+    Out-File -InputObject $CancelBaseBatch -FilePath $LastCleanUpPeBatPath -Encoding default
 }
 
 Function Global:Begin-CreateBuildPeBatch
@@ -187,11 +187,11 @@ Function Global:Begin-CreateBuildPeBatch
 Function Global:Create-CopyWindowsReBatch
 {
     # 読み込み
-    $BatchPath = Join-Path $Script:ProjectDirectoryPath $BaseExportReFromWimPath
+    $BatchPath = Join-Path $ProjectDirectoryPath $BaseExportReFromWimPath
     $BaseBatch = Get-Content -Path $BatchPath -Raw
 	$BaseBatch = Replace-BuilderEnvironment $BaseBatch
-    $Script:LastBuildPeBatPath = Join-Path $Script:ProjectDirectoryPath $ExportReBatPath 
-    Out-File -InputObject $BaseBatch -FilePath $Script:LastBuildPeBatPath -Encoding default
+    $Script:LastBuildPeBatPath = Join-Path $ProjectDirectoryPath $ExportReBatPath 
+    Out-File -InputObject $BaseBatch -FilePath $LastBuildPeBatPath -Encoding default
 }
 
 Function Global:Begin-CopyWindowsReBatch
@@ -215,7 +215,7 @@ Function Global:Begin-CopyWindowsReBatch
 
 		If ($(Get-ChildItem $OpenFileDialog.FileName).get_Extension().ToLower() -eq ".esd"){
 			$Script:WindowsInstallEsdPath = $OpenFileDialog.FileName
-			$Script:WindowsInstallWimPath = $Script:CopyWimFilePath,"-Source.wim"
+			$Script:WindowsInstallWimPath = $CopyWimFilePath,"-Source.wim"
 		}
 		Else{
 			$Script:WindowsInstallEsdPath = ""
@@ -227,7 +227,7 @@ Function Global:Begin-CopyWindowsReBatch
 
 		If ((Test-Path -Path $LastBuildPeBatPath) -eq $True)
 		{
-			$MainWindow.FindName("WimPathTextBox").Text = $Script:CopyWimFilePath
+			$MainWindow.FindName("WimPathTextBox").Text = $CopyWimFilePath
 		}
         
     }

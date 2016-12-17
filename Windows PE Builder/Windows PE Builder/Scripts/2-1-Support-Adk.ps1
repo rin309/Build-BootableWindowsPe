@@ -30,7 +30,7 @@ If ([Environment]::Is64BitProcess -eq $True)
     If ((Test-Path -Path HKLM:SOFTWARE\Wow6432Node\Symantec\Ghost) -eq $True)
     {
         $Script:GhostPath = $(Get-ItemProperty -Path HKLM:SOFTWARE\Wow6432Node\Symantec\Ghost).InstallDir
-        $Script:GhostPath = Join-Path $Script:GhostPath "bootwiz\OEM\GSS\winpe\%PlatformId%\Base"
+        $Script:GhostPath = Join-Path $GhostPath "bootwiz\OEM\GSS\winpe\%PlatformId%\Base"
     }
 }
 Else
@@ -38,6 +38,6 @@ Else
     If ((Test-Path -Path HKLM:SOFTWARE\Symantec\Ghost) -eq $True)
     {
         $Script:GhostPath = $(Get-ItemProperty -Path HKLM:SOFTWARE\Symantec\Ghost).InstallDir
-        $Script:GhostPath = Join-Path $Script:GhostPath "bootwiz\OEM\GSS\winpe\%PlatformId%\Base"
+        $Script:GhostPath = Join-Path $GhostPath "bootwiz\OEM\GSS\winpe\%PlatformId%\Base"
     }
 }
