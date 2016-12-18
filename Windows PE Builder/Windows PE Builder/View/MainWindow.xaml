@@ -21,7 +21,6 @@
             <BeginStoryboard Storyboard="{StaticResource Storyboard_Indeterminate}"/>
         </EventTrigger>
     </Window.Triggers>
-
     <Grid>
         <TabControl Style="{DynamicResource TabControlStyle}" >
             <TabItem Tag="セットアップ" Style="{DynamicResource TabItemStyle}">
@@ -144,33 +143,34 @@
                                 <StackPanel>
                                     <CheckBox x:Name="SupportJapaneseLanguageCheckBox" IsChecked="True">日本語表示のサポート</CheckBox>
                                     <CheckBox x:Name="SupportAddJapaneseLanguagePackCheckBox" IsChecked="False">日本語言語パックのインストール</CheckBox>
-                                    <CheckBox x:Name="SupportPsCheckBox">PowerShellのサポート</CheckBox>
+                                    <!--<CheckBox x:Name="SupportPsCheckBox">PowerShellのサポート</CheckBox>
                                     <CheckBox x:Name="SupportWmiCheckBox" Margin="20,0,0,0" IsEnabled="False" IsChecked="{Binding IsChecked, ElementName=SupportPsCheckBox}">WinPE-WMI</CheckBox>
                                     <CheckBox x:Name="SupportNetFxCheckBox" Margin="20,0,0,0" IsEnabled="False" IsChecked="{Binding IsChecked, ElementName=SupportPsCheckBox}">.NET Framework 4.5のサポート</CheckBox>
                                     <CheckBox x:Name="SupportScriptingCheckBox" Margin="20,0,0,0" IsEnabled="False" IsChecked="{Binding IsChecked, ElementName=SupportPsCheckBox}">WinPE-Scripting</CheckBox>
                                     <CheckBox x:Name="SupportDismCmdletsCheckBox" Margin="20,0,0,0">WinPE-DismCmdlets</CheckBox>
                                     <CheckBox x:Name="SupportSecureBootCmdletsCheckBox" Margin="20,0,0,0">WinPE-SecureBootCmdlets</CheckBox>
                                     <CheckBox x:Name="SupportStorageWmiCheckBox2" Margin="20,0,0,0" IsEnabled="False" IsChecked="{Binding IsChecked, ElementName=SupportPsCheckBox}">WinPE-StorageWMI-Package (Windows 8.1 および Windows Server 2012 R2 の基本イメージに追加)</CheckBox>
-                                    <!--<CheckBox x:Name="SupportJapaneseImeCheckBox">日本語入力のサポート</CheckBox>
+                                    <CheckBox x:Name="SupportJapaneseImeCheckBox">日本語入力のサポート</CheckBox>-->
                                     <CheckBox x:Name="SupportPsCheckBox">PowerShellのサポート</CheckBox>
-                                    <CheckBox x:Name="SupportWmiCheckBox" Margin="20,0,0,0" IsEnabled="False" IsChecked="{Binding IsChecked, ElementName=SupportWmiCheckBox}">WinPE-WMI</CheckBox>
+                                    <CheckBox x:Name="SupportWmiCheckBox" Margin="20,0,0,0" IsEnabled="False">WinPE-WMI</CheckBox>
                                     <CheckBox x:Name="SupportNetFxCheckBox" Margin="20,0,0,0" IsEnabled="False">.NET Framework 4.5のサポート</CheckBox>
-                                    <CheckBox x:Name="SupportScriptingCheckBox" Margin="20,0,0,0" IsEnabled="False" IsChecked="{Binding IsChecked, ElementName=SupportScriptingCheckBox}">WinPE-Scripting</CheckBox>
+                                    <CheckBox x:Name="SupportScriptingCheckBox" Margin="20,0,0,0" IsEnabled="False">WinPE-Scripting</CheckBox>
                                     <CheckBox x:Name="SupportDismCmdletsCheckBox" Margin="20,0,0,0">WinPE-DismCmdlets</CheckBox>
                                     <CheckBox x:Name="SupportSecureBootCmdletsCheckBox" Margin="20,0,0,0">WinPE-SecureBootCmdlets</CheckBox>
-                                    <CheckBox x:Name="SupportStorageWmiCheckBox2" Margin="20,0,0,0" IsEnabled="False" IsChecked="{Binding IsChecked, ElementName=SupportStorageWmiCheckBox}">WinPE-StorageWMI-Package (Windows 8.1 および Windows Server 2012 R2 の基本イメージに追加)</CheckBox>
+                                    <CheckBox x:Name="SupportStorageWmiCheckBox" Margin="20,0,0,0" IsEnabled="False">WinPE-StorageWMI-Package (Windows 8.1 および Windows Server 2012 R2 の基本イメージに追加)</CheckBox>
                                     <CheckBox x:Name="SupportWindowsReCheckBox">回復環境 (Windows RE) と同等にする</CheckBox>
-                                    <CheckBox x:Name="SupportWmiCheckBox2" Margin="20,0,0,0" IsEnabled="False">WinPE-WMI</CheckBox>
+                                    <!--<CheckBox x:Name="SupportWmiCheckBox2" Margin="20,0,0,0" IsEnabled="False" IsChecked="{Binding IsChecked, ElementName=SupportWmiCheckBox}">WinPE-WMI</CheckBox>-->
                                     <CheckBox x:Name="SupportWindowsFoundationPackageCheckBox" Margin="20,0,0,0" IsEnabled="False">Microsoft-Windows-Foundation-Package</CheckBox>
                                     <CheckBox x:Name="SupportEsCheckBox" Margin="20,0,0,0" IsEnabled="False">WinPE-EnhancedStorage</CheckBox>
                                     <CheckBox x:Name="SupportRejuvCheckBox" Margin="20,0,0,0" IsEnabled="False">WinPE-Rejuv</CheckBox>
-                                    <CheckBox x:Name="SupportScriptingCheckBox2" Margin="20,0,0,0" IsEnabled="False">WinPE-Scripting</CheckBox>
+                                    <!--<CheckBox x:Name="SupportScriptingCheckBox2" Margin="20,0,0,0" IsEnabled="False" IsChecked="{Binding IsChecked, ElementName=SupportScriptingCheckBox}">WinPE-Scripting</CheckBox>-->
                                     <CheckBox x:Name="SupportSecureStartupCheckBox" Margin="20,0,0,0" IsEnabled="False">WinPE-SecureStartup</CheckBox>
                                     <CheckBox x:Name="SupportSetupCheckBox" Margin="20,0,0,0" IsEnabled="False">WinPE-Setup</CheckBox>
                                     <CheckBox x:Name="SupportSrtCheckBox" Margin="20,0,0,0" IsEnabled="False">WinPE-SRT</CheckBox>
                                     <CheckBox x:Name="SupportWdsCheckBox" Margin="20,0,0,0" IsEnabled="False">WinPE-WDS-Tools</CheckBox>
-                                    <CheckBox x:Name="SupportStorageWmiCheckBox2" Margin="20,0,0,0" IsEnabled="False">WinPE-StorageWMI-Package (Windows 8.1 および Windows Server 2012 R2 の基本イメージに追加)</CheckBox>
-                                    <CheckBox x:Name="SupportHtaCheckBox" Margin="20,0,0,0" IsEnabled="False">WinPE-HTA (Windows 10 の基本イメージに追加)</CheckBox>-->
+                                    <!--<CheckBox x:Name="SupportStorageWmiCheckBox2" Margin="20,0,0,0" IsEnabled="False" IsChecked="{Binding IsChecked, ElementName=SupportStorageWmiCheckBox}">WinPE-StorageWMI-Package (Windows 8.1 および Windows Server 2012 R2 の基本イメージに追加)</CheckBox>-->
+                                    <CheckBox x:Name="SupportHtaCheckBox" Margin="20,0,0,0" IsEnabled="False">WinPE-HTA (Windows 10 の基本イメージに追加)</CheckBox>
+                                    <CheckBox x:Name="SupportWindowsPeShellCheckBox">winpeshl.iniの名前を変更して読み込まないようにする (Windows REイメージのみ)</CheckBox>
                                 </StackPanel>
                             </StackPanel>
                         </Expander>
@@ -410,7 +410,7 @@
 
         </TabControl>
 
-        <Grid Background="#337F7F7F" x:Name="CreateProjectRoot">
+        <Grid Background="#337F7F7F" x:Name="CreateProjectRoot" Visibility="Hidden">
             <Border HorizontalAlignment="Center" VerticalAlignment="Center" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1">
                 <StackPanel Margin="20">
                     <TextBlock FontSize="22">新しいプロジェクト</TextBlock>
@@ -432,7 +432,7 @@
         </Grid>
 
         <Grid x:Name="EulaRoot">
-            <Grid Background="{DynamicResource BackgroundBrush}" VerticalAlignment="Center">
+            <Grid Background="{DynamicResource BackgroundBrush}" VerticalAlignment="Center" Visibility="Hidden">
                 <StackPanel Orientation="Vertical" MaxWidth="600">
 
                     <TextBlock Padding="{DynamicResource NormalThickness}" Foreground="White" Margin="0,10,0,0" FontSize="22"><Run Language="ja-jp" Text="作成したファイルは必ず動作確認を行ってください"/></TextBlock>

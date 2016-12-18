@@ -39,7 +39,7 @@ Function Global:Check-WindowsPeFeature($WindowsReIsEnabled, $PowershellIsEnabled
 	If (($WindowsReIsEnabled -eq $True) -and ($PowershellIsEnabled -eq $True))
 	{
 		$MainWindow.FindName("SupportWmiCheckBox").IsChecked = $True
-		#$MainWindow.FindName("SupportWindowsFoundationPackageCheckBox").IsChecked = $True
+		$MainWindow.FindName("SupportWindowsFoundationPackageCheckBox").IsChecked = $True
 		$MainWindow.FindName("SupportEsCheckBox").IsChecked = $True
 		$MainWindow.FindName("SupportRejuvCheckBox").IsChecked = $True
 		$MainWindow.FindName("SupportScriptingCheckBox").IsChecked = $True
@@ -57,7 +57,7 @@ Function Global:Check-WindowsPeFeature($WindowsReIsEnabled, $PowershellIsEnabled
 	ElseIf (($WindowsReIsEnabled -eq $True) -and ($PowershellIsEnabled -eq $False))
 	{
 		$MainWindow.FindName("SupportWmiCheckBox").IsChecked = $True
-		#$MainWindow.FindName("SupportWindowsFoundationPackageCheckBox").IsChecked = $True
+		$MainWindow.FindName("SupportWindowsFoundationPackageCheckBox").IsChecked = $True
 		$MainWindow.FindName("SupportEsCheckBox").IsChecked = $True
 		$MainWindow.FindName("SupportRejuvCheckBox").IsChecked = $True
 		$MainWindow.FindName("SupportScriptingCheckBox").IsChecked = $True
@@ -74,7 +74,7 @@ Function Global:Check-WindowsPeFeature($WindowsReIsEnabled, $PowershellIsEnabled
 	}
 	ElseIf (($WindowsReIsEnabled -eq $False) -and ($PowershellIsEnabled -eq $True))
 	{
-		#$MainWindow.FindName("SupportWindowsFoundationPackageCheckBox").IsChecked = $True
+		$MainWindow.FindName("SupportWindowsFoundationPackageCheckBox").IsChecked = $True
 		$MainWindow.FindName("SupportEsCheckBox").IsChecked = $False
 		$MainWindow.FindName("SupportRejuvCheckBox").IsChecked = $False
 		$MainWindow.FindName("SupportSecureStartupCheckBox").IsChecked = $False
@@ -93,7 +93,7 @@ Function Global:Check-WindowsPeFeature($WindowsReIsEnabled, $PowershellIsEnabled
 	Else
 	{
 		$MainWindow.FindName("SupportWmiCheckBox").IsChecked = $False
-		#$MainWindow.FindName("SupportWindowsFoundationPackageCheckBox").IsChecked = $False
+		$MainWindow.FindName("SupportWindowsFoundationPackageCheckBox").IsChecked = $False
 		$MainWindow.FindName("SupportEsCheckBox").IsChecked = $False
 		$MainWindow.FindName("SupportRejuvCheckBox").IsChecked = $False
 		$MainWindow.FindName("SupportScriptingCheckBox").IsChecked = $False
@@ -227,6 +227,9 @@ Function Global:Load-Xaml()
 {
     $Script:MainWindow = Read-Xaml("View/MainWindow.xaml")
 
+	$MainWindow.FindName("CreateProjectRoot").Visibility = [System.Windows.Visibility]::Visible
+	$MainWindow.FindName("EulaRoot").Visibility = [System.Windows.Visibility]::Visible
+
     $WindowsAdkPathButton = $MainWindow.FindName("WindowsAdkPathButton")
     $WindowsAdkPathButton.Add_Click({
         $WindowsAdkPathTextBox = $MainWindow.FindName("WindowsAdkPathTextBox")
@@ -293,12 +296,20 @@ Function Global:Load-Xaml()
     })
 
 	#Windows RE
-	<#$MainWindow.FindName("SupportWindowsReCheckBox").Add_Checked({Check-WindowsPeFeature $MainWindow.FindName("SupportWindowsReCheckBox").IsChecked $MainWindow.FindName("SupportPsCheckBox").IsChecked })
-	$MainWindow.FindName("SupportWindowsReCheckBox").Add_UnChecked({Check-WindowsPeFeature $MainWindow.FindName("SupportWindowsReCheckBox").IsChecked $MainWindow.FindName("SupportPsCheckBox").IsChecked })#>
+	$MainWindow.FindName("SupportWindowsReCheckBox").Add_Checked({
+		Check-WindowsPeFeature $MainWindow.FindName("SupportWindowsReCheckBox").IsChecked $MainWindow.FindName("SupportPsCheckBox").IsChecked
+	})
+	$MainWindow.FindName("SupportWindowsReCheckBox").Add_UnChecked({
+		Check-WindowsPeFeature $MainWindow.FindName("SupportWindowsReCheckBox").IsChecked $MainWindow.FindName("SupportPsCheckBox").IsChecked
+	})
 	
 	#PowerShell
-	<#$MainWindow.FindName("SupportPsCheckBox").Add_Checked({Check-WindowsPeFeature $MainWindow.FindName("SupportWindowsReCheckBox").IsChecked $MainWindow.FindName("SupportPsCheckBox").IsChecked })
-	$MainWindow.FindName("SupportPsCheckBox").Add_UnChecked({Check-WindowsPeFeature $MainWindow.FindName("SupportWindowsReCheckBox").IsChecked $MainWindow.FindName("SupportPsCheckBox").IsChecked })#>
+	$MainWindow.FindName("SupportPsCheckBox").Add_Checked({
+		Check-WindowsPeFeature $MainWindow.FindName("SupportWindowsReCheckBox").IsChecked $MainWindow.FindName("SupportPsCheckBox").IsChecked
+	})
+	$MainWindow.FindName("SupportPsCheckBox").Add_UnChecked({
+		Check-WindowsPeFeature $MainWindow.FindName("SupportWindowsReCheckBox").IsChecked $MainWindow.FindName("SupportPsCheckBox").IsChecked
+	})
 
 
     $ProjectPathTextBox = $MainWindow.FindName("ProjectPathTextBox")

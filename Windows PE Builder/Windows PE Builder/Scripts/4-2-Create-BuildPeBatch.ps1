@@ -135,6 +135,7 @@ Function Global:Replace-BuilderEnvironment($Base)
 	$Base = $Base.Replace("%Support-Japanese-WinPE-WMI_ja-jp%", (Check-Boolean-ForWriteCommand($MainWindow.FindName("SupportAddJapaneseLanguagePackCheckBox").IsChecked)))
 	#$Base = $Base.Replace("%%", (Check-Boolean-ForWriteCommand($MainWindow.FindName("SupportAddJapaneseLanguagePackCheckBox").IsChecked)))
 	$Base = $Base.Replace("%Support-Japanese%", (Check-Boolean-ForWriteCommand($MainWindow.FindName("SupportJapaneseLanguageCheckBox").IsChecked)))
+	$Base = $Base.Replace("%Support-WindowsPeShell%", (Check-Boolean-ForWriteCommand($MainWindow.FindName("SupportWindowsPeShellCheckBox").IsChecked)))
 	
 	#$Base = $Base.Replace("%%", (Check-Boolean-ForWriteCommand($MainWindow.FindName("").IsChecked)))
 	

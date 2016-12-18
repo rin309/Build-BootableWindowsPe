@@ -85,6 +85,7 @@ copy "%PeDirectory%\mount\Windows\Boot\PXE\bootmgr.exe" "%PeDirectory%\media\Boo
 copy "%PeDirectory%\mount\Windows\Boot\PXE\pxeboot.n12" "%PeDirectory%\media\Boot\pxeboot.n12"
 
 @rem 追加のカスタマイズを行う場合はここにコードを記載する
+%Support-WindowsPeShell%move "%PeDirectory%\mount\Windows\System32\winpeshl.ini" "%PeDirectory%\mount\Windows\System32\winpeshl.in_"
 @rem pause
 
 @rem 追加済みの機能を確認する
