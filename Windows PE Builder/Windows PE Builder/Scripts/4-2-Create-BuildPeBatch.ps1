@@ -149,7 +149,7 @@ Function Global:Create-BuildPeBatch
     $Script:BatchPath = Join-Path $ProjectDirectoryPath $BaseBatchPath
     $BaseBatch = Get-Content -Path $BatchPath -Raw
 	$BaseBatch = Replace-BuilderEnvironment $BaseBatch
-    $Script:LastBuildPeBatPath = Join-Path $ProjectDirectoryPath $BuildPeBatPath 
+    $Global:LastBuildPeBatPath = Join-Path $ProjectDirectoryPath $BuildPeBatPath 
     Out-File -InputObject $BaseBatch -FilePath $LastBuildPeBatPath -Encoding default
 
     $Script:CancelBatchPath = Join-Path $ProjectDirectoryPath $CancelBatchPath
@@ -191,7 +191,7 @@ Function Global:Create-CopyWindowsReBatch
     $BatchPath = Join-Path $ProjectDirectoryPath $BaseExportReFromWimPath
     $BaseBatch = Get-Content -Path $BatchPath -Raw
 	$BaseBatch = Replace-BuilderEnvironment $BaseBatch
-    $Script:LastBuildPeBatPath = Join-Path $ProjectDirectoryPath $ExportReBatPath 
+    $Global:LastBuildPeBatPath = Join-Path $ProjectDirectoryPath $ExportReBatPath 
     Out-File -InputObject $BaseBatch -FilePath $LastBuildPeBatPath -Encoding default
 }
 
