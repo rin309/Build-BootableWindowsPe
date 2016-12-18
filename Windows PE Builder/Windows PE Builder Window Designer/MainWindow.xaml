@@ -431,8 +431,8 @@
             </Border>
         </Grid>
 
-        <Grid x:Name="EulaRoot">
-            <Grid Background="{DynamicResource BackgroundBrush}" VerticalAlignment="Center" Visibility="Hidden">
+        <Grid x:Name="EulaRoot" Visibility="Hidden">
+            <Grid Background="{DynamicResource BackgroundBrush}" VerticalAlignment="Center">
                 <StackPanel Orientation="Vertical" MaxWidth="600">
 
                     <TextBlock Padding="{DynamicResource NormalThickness}" Foreground="White" Margin="0,10,0,0" FontSize="22"><Run Language="ja-jp" Text="作成したファイルは必ず動作確認を行ってください"/></TextBlock>

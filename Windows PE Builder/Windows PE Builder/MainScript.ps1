@@ -15,7 +15,7 @@ Add-Type -AssemblyName System.Windows.Forms
 $Script:BasedDirectory = Split-Path $MyInvocation.MyCommand.Path -Parent
 #
 # プロジェクトフォルダーの初期値
-$Global:ProjectDirectoryPath = "D:\Windows PE"
+$Global:ProjectDirectoryPath = ""
 #
 # ドライバーがあるフォルダー
 $Global:DriverDirectoryPath = "%ProjectDirectory%\Drivers\%PlatformId%"
